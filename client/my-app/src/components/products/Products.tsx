@@ -30,8 +30,12 @@ const Products = () => {
 				{data.map((product: IProduct) => (
 					<div className='item-wrapper'>
 						<li key={product.id} className='item-wrapper__item'>
+							<div className='product-img'>
+								<img src={product.url} alt='product-img' />
+							</div>
+							<p>{product.brand_name}</p>
 							<h3>{product.name}</h3>
-							<p>{product.short_description}</p>
+							<p>{product.price} kr</p>
 						</li>
 					</div>
 				))}

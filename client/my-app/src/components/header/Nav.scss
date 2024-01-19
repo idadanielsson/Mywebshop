@@ -1,0 +1,22 @@
+.navlist {
+	list-style: none;
+	display: flex;
+	padding: 0;
+}
+
+.navcontainer {
+	max-width: 1024px;
+	display: flex;
+	justify-content: space-between;
+	margin: auto;
+	align-items: center;
+	width: 100%;
+}
+
+.navlinks {
+	text-decoration: none;
+
+	margin: 0px 5px;
+	font-weight: 600;
+	text-transform: uppercase;
+}

@@ -6,6 +6,9 @@ export interface IProduct {
 	fk_categoryId: number;
 	fk_subcategoryId: number;
 	fk_brandId: number;
+	url: string;
+	brand_name: string;
+	price: number;
 }
 
 export interface ApiResponse {

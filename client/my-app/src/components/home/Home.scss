@@ -5,10 +5,36 @@
 
 .hero {
 	width: 100%;
-	height: 500px;
-	background-image: url(../../assets/inredning-hero.webp);
+	height: 600px;
+	background-image: url(../../assets/home.png);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
 	padding: 0;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	&__text {
+		width: 40%;
+		position: relative;
+		text-align: center;
+		font-size: 42px;
+		color: white;
+	}
+
+	&__button {
+		background-color: #302219;
+		color: white;
+		padding: 10px 50px;
+		border: none;
+		border-radius: 5px;
+		font-size: 16px;
+		cursor: pointer;
+		box-shadow: 0 4px 8px 0 #1f1610(0, 0, 0, 0.2);
+		transition: 0.3s;
+		margin-top: 20px;
+	}
 }
