@@ -12,4 +12,13 @@ if (isset($_GET['action'])) {
         $productApi->outputProducts($products);
     }         
 }
+
+if ($chosenAction == 'products-id') {
+    if (isset($_GET['id'])) {
+            $productId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+            $product = $productModel->getProductById($productId);
+            $productApi->outputProductById($product);
+    }
+}
+
 ?>

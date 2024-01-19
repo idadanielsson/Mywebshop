@@ -12,5 +12,16 @@ class ProductApi {
         
         echo json_encode($json);
     }
+
+    public function outputProductById($product): void {
+        if ($product !== null) {
+            $json = [
+                'product' => $product
+            ];
+        } 
+
+        header("Content-Type: application/json");
+        echo json_encode($json);
+    }
 }
 ?>

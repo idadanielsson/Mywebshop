@@ -12,4 +12,9 @@ class Controller {
         $products =  $this->db->getProducts();
         return $products;
     }
+
+    public function get_product() {
+        $product =  $this->db->getProductById();
+        return $product;
+    }
 }

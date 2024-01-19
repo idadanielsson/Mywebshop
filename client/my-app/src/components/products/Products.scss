@@ -1,12 +1,28 @@
 .products {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	&__list {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		padding: 0;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.products__list {
+		width: 90%;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr 1fr;
 	}
 }
 
 .item-wrapper {
-	width: 30%;
-	padding: 40px;
+	width: 90%;
+	&__item {
+		list-style-type: none;
+		padding: 20px;
+	}
 }
