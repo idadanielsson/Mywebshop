@@ -1,0 +1,12 @@
+.products {
+	&__list {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.item-wrapper {
+	width: 30%;
+	padding: 40px;
+}

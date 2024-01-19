@@ -7,8 +7,9 @@ class ProductApi {
                 'result' => $products
             ];
         } 
-        
         header("Content-Type: application/json");
+
+        
         echo json_encode($json);
     }
 }
