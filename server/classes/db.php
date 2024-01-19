@@ -30,6 +30,21 @@ class DB {
 
         return $statement->fetch();
     }
+
+    public function getCategories() {
+        $query = 'SELECT * FROM categories';
+        $statement = $this->pdo->query($query); 
+    
+        return $statement->fetchAll(); 
+    }
+
+    public function getCategoryById($categoryId) {
+        $query = 'SELECT * FROM categories WHERE id = :category_id';
+        $statement = $this->pdo->prepare($query);
+        $statement->execute(['category_id' => $categoryId]);
+
+        return $statement->fetch();
+    }
 }
 
 ?>

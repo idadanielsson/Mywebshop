@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './Home.scss';
 import Products from '../products/Products';
 import { Nav } from '../header/Nav';
+import Categories from '../products/Categories';
 
 export const Home = () => {
 	return (
@@ -16,6 +17,9 @@ export const Home = () => {
 						Köp nu
 					</button>
 				</Link>
+			</div>
+			<div className='category'>
+				<Categories></Categories>
 			</div>
 			<div className='shop'>
 				<Products></Products>
