@@ -18,7 +18,7 @@ if (isset($_GET['action'])) {
 if ($chosenAction == 'products-id') {
     if (isset($_GET['id'])) {
             $productId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-            $product = $productModel->getProductById($productId);
+            $product = $database->getProductById($productId);
             $productApi->outputProductById($product);
     }
 }

@@ -25,15 +25,20 @@ const Categories = () => {
 	if (error) return <div>Error: {error}</div>;
 
 	return (
-		<div className='categories'>
-			<ul className='categories__list'>
-				{data.map((category: ICategory) => (
-					<li key={category.id} className='categories__item'>
-						<a href='#'>{category.name}</a>
-					</li>
-				))}
-			</ul>
-		</div>
+		<>
+			<div className='category-title'>
+				<h1>Shop by category</h1>
+			</div>
+			<div className='categories'>
+				<ul className='categories__list'>
+					{data.map((category: ICategory) => (
+						<li key={category.id} className='categories__item'>
+							<a href='#'>{category.name}</a>
+						</li>
+					))}
+				</ul>
+			</div>
+		</>
 	);
 };
 

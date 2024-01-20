@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IProduct } from '../../models/IProduct';
 import { getProducts } from '../../services/productServices';
 import '../products/Products.scss';
+import { Link, useParams } from 'react-router-dom';
 
 const Products = () => {
 	const [data, setData] = useState<IProduct[]>([]);

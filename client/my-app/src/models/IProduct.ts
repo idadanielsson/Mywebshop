@@ -14,3 +14,7 @@ export interface IProduct {
 export interface ApiResponse {
 	result: IProduct[];
 }
+
+export interface IProductResponse {
+	product: IProduct;
+}

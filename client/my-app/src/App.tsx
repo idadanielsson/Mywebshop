@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Products from './components/products/Products';
 import { Nav } from './components/header/Nav';
+import { Footer } from './Footer';
+import { Outlet } from 'react-router-dom';
 
 function App() {
 	return (
@@ -10,8 +12,9 @@ function App() {
 			<header>
 				<Nav />
 			</header>
-			<main></main>
-			<footer></footer>
+			<main>
+				<Outlet />
+			</main>
 		</>
 	);
 }

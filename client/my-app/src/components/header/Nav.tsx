@@ -20,7 +20,10 @@ export const Nav = () => {
 	};
 
 	return (
-		<div className='headercontainer'>
+		<>
+			<div className='small-wrapper'>
+				<span>Fri frakt vid köp över 499:-</span>
+			</div>
 			<div className='navcontainer'>
 				<ul className='navlist'>
 					<li>
@@ -41,8 +44,7 @@ export const Nav = () => {
 						</Link>
 					</li>
 				</ul>
-				<div></div>
 			</div>
-		</div>
+		</>
 	);
 };

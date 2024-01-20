@@ -38,3 +38,60 @@
 		margin-top: 20px;
 	}
 }
+
+.sale {
+	width: 100%;
+	display: flex;
+
+	&__img-2 {
+		width: 50%;
+		height: 400px;
+		background-image: url('../../assets/dukning-3.png');
+		background-size: cover;
+		background-repeat: no-repeat;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		h3 {
+			font-size: 42px;
+			color: white;
+			padding-bottom: 20px;
+		}
+
+		a {
+			color: white;
+			font-size: 18px;
+			text-transform: uppercase;
+		}
+	}
+
+	&__img-3 {
+		width: 50%;
+		height: 400px;
+		background-color: rgb(241, 238, 234);
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		p {
+			font-size: 28px;
+			font-weight: lighter;
+		}
+
+		h3 {
+			font-size: 56px;
+			padding: 20px;
+			font-weight: normal;
+		}
+	}
+}
+
+.footer {
+	height: 300px;
+	background-color: #515151;
+}
