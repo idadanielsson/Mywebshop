@@ -17,9 +17,11 @@ if (isset($_GET['action'])) {
 
 if ($chosenAction == 'products-id') {
     if (isset($_GET['id'])) {
-            $productId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-            $product = $database->getProductById($productId);
-            $productApi->outputProductById($product);
+        $productId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+        $product = $database->getProductById($productId);
+        $imageUrls = $database->getProductImagesById($productId);
+        $product['urls'] = $imageUrls;
+        $productApi->outputProductById($product);
     }
 }
 

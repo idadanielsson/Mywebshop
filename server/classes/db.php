@@ -24,11 +24,22 @@ class DB {
     }
 
     public function getProductById($productId) {
-        $query = 'SELECT * FROM products WHERE id = :products_id';
-        $statement = $this->pdo->prepare($query);
-        $statement->execute(['products_id' => $productId]);
+        $stmt = $this->pdo->prepare('SELECT p.*, 
+            b.name as brand_name, 
+            ps.price
+            FROM products p
+            LEFT JOIN brands b ON p.fk_brandId = b.id
+            LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
+            WHERE p.id = :productId
+            GROUP BY p.id, b.name, p.img, p.description, p.short_description, ps.price;');
+        $stmt->execute(['productId' => $productId]);
+        return $stmt->fetch();
+    }
 
-        return $statement->fetch();
+    public function getProductImagesById($productId) {
+        $stmt = $this->pdo->prepare('SELECT url FROM product_images WHERE fk_productId = :productId');
+        $stmt->execute(['productId' => $productId]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
     }
 
     public function getCategories() {

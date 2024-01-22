@@ -29,16 +29,18 @@ const Products = () => {
 		<div className='products'>
 			<ul className='products__list'>
 				{data.map((product: IProduct) => (
-					<div className='item-wrapper'>
-						<li key={product.id} className='item-wrapper__item'>
-							<div className='product-img'>
-								<img src={product.url} alt='product-img' />
-							</div>
-							<p>{product.brand_name}</p>
-							<h3>{product.name}</h3>
-							<p>{product.price} kr</p>
-						</li>
-					</div>
+					<Link key={product.id} to={`/product/${product.id}`}>
+						<div className='item-wrapper'>
+							<li key={product.id} className='item-wrapper__item'>
+								<div className='product-img'>
+									<img src={product.url} alt='product-img' />
+								</div>
+								<p>{product.brand_name}</p>
+								<h3>{product.name}</h3>
+								<p>{product.price} kr</p>
+							</li>
+						</div>
+					</Link>
 				))}
 			</ul>
 		</div>

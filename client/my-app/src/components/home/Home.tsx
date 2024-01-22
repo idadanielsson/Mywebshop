@@ -13,7 +13,7 @@ export const Home = () => {
 			</div>
 			<div className='hero'>
 				<h3 className='hero__text'>Hem & inredning</h3>
-				<Link to='/shop'>
+				<Link to='/products'>
 					<button className='hero__button' id='indexbutton'>
 						Köp nu
 					</button>

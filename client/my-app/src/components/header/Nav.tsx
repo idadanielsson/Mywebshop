@@ -32,15 +32,15 @@ export const Nav = () => {
 						</Link>
 					</li>
 					<li>
-						<Link className='navlinks' to='/shop'>
+						<Link className='navlinks' to='/products'>
 							Shop
 						</Link>
 					</li>
 					<li className='navlinks'>Kontakt</li>
 
 					<li>
-						<Link className='navlinks' to='/faq'>
-							FAQ
+						<Link className='navlinks' to='/about'>
+							Om oss
 						</Link>
 					</li>
 				</ul>

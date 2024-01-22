@@ -7,8 +7,10 @@ export interface IProduct {
 	fk_subcategoryId: number;
 	fk_brandId: number;
 	url: string;
+	urls: string[];
 	brand_name: string;
 	price: number;
+	img: string;
 }
 
 export interface ApiResponse {
