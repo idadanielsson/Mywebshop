@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../header/Nav.scss';
+import '../nav/Nav.scss';
 import { useState } from 'react';
 
 // interface INavProps {

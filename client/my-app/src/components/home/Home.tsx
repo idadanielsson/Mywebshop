@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Home.scss';
-import Products from '../products/Products';
-import { Nav } from '../header/Nav';
-import Categories from '../products/Categories';
+import Products from '../shop/products/Products';
+import Categories from '../shop/categories/Categories';
 import { Footer } from '../../Footer';
 
 export const Home = () => {

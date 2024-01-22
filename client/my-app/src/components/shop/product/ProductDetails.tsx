@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { IProduct } from '../../models/IProduct';
-import { getProductById, getProducts } from '../../services/productServices';
+import { IProduct } from '../../../models/IProduct';
+import { getProductById, getProducts } from '../../../services/productServices';
 import { useParams } from 'react-router-dom';
 import { url } from 'inspector';
-import '../products/ProductDetails.scss';
+import './ProductDetails.scss';
 
 const ProductDetails = () => {
 	const [product, setProduct] = useState<IProduct>();

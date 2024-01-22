@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import '../products/Categories.scss';
-import { getCategories } from '../../services/categoryServices';
-import { ICategory } from '../../models/ICategory';
+import './Categories.scss';
+import { getCategories } from '../../../services/categoryServices';
+import { ICategory } from '../../../models/ICategory';
 
 const Categories = () => {
 	const [data, setData] = useState<ICategory[]>([]);
