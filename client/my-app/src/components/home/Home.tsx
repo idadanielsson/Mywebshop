@@ -8,9 +8,6 @@ import { Footer } from '../../Footer';
 export const Home = () => {
 	return (
 		<>
-			<div>
-				<Nav />
-			</div>
 			<div className='hero'>
 				<h3 className='hero__text'>Hem & inredning</h3>
 				<Link to='/products'>

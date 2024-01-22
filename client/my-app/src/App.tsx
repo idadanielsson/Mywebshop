@@ -5,6 +5,7 @@ import Products from './components/products/Products';
 import { Nav } from './components/header/Nav';
 import { Footer } from './Footer';
 import { Outlet } from 'react-router-dom';
+import './components/home/Home.scss';
 
 function App() {
 	return (

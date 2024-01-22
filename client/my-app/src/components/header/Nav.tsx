@@ -36,11 +36,20 @@ export const Nav = () => {
 							Shop
 						</Link>
 					</li>
-					<li className='navlinks'>Kontakt</li>
 
 					<li>
 						<Link className='navlinks' to='/about'>
 							Om oss
+						</Link>
+					</li>
+					<li>
+						<Link className='navlinks' to='/faq'>
+							FAQ
+						</Link>
+					</li>
+					<li className='navlinks'>
+						<Link className='navlinks' to='/contact'>
+							Kontakt
 						</Link>
 					</li>
 				</ul>

@@ -4,23 +4,20 @@ import Products from './components/products/Products';
 import { Home } from './components/home/Home';
 import ProductDetails from './components/products/ProductDetails';
 import { About } from './components/home/about/About';
+import { Faq } from './components/home/faq/Faq';
+import { Contact } from './components/home/contact/Contact';
 
 export const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Home />,
-		index: true,
-	},
-	{
-		path: '/about',
-		element: <About />,
-	},
-	{
-		path: '/products',
-		element: <Products />,
-	},
-	{
-		path: '/product/:id',
-		element: <ProductDetails />,
+		element: <App />,
+		children: [
+			{ path: '/', element: <Home />, index: true },
+			{ path: '/about', element: <About /> },
+			{ path: '/products', element: <Products /> },
+			{ path: '/product/:id', element: <ProductDetails /> },
+			{ path: '/faq', element: <Faq /> },
+			{ path: '/contact', element: <Contact /> },
+		],
 	},
 ]);
