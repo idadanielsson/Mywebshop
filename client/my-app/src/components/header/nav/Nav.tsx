@@ -1,15 +1,18 @@
 import { Link } from 'react-router-dom';
 import '../nav/Nav.scss';
 import { useState } from 'react';
+import { Cart } from '../cart/Cart';
+import { CartItem } from '../../../models/CartItem';
+import { CartBig } from '../cart/CartBig';
 
-// interface INavProps {
-// 	cart: CartItem[];
-// 	plusProduct(p: CartItem): void;
-// 	minusProduct(p: CartItem, i: number): void;
-// 	cartTotalPrice: number;
-// }
+interface INavProps {
+	cart: CartItem[];
+	plusProduct(p: CartItem): void;
+	minusProduct(p: CartItem, i: number): void;
+	cartTotalPrice: number;
+}
 
-export const Nav = () => {
+export const Nav = (props: INavProps) => {
 	const [shopActive, setShopActive] = useState(false);
 
 	const toggleCart = () => {
@@ -53,7 +56,21 @@ export const Nav = () => {
 						</Link>
 					</li>
 				</ul>
+				<Cart
+					closeCartFunction={closeCart}
+					openCartFunction={toggleCart}
+					cartclick={shopActive}
+					cart={props.cart}
+				/>
 			</div>
+			<CartBig
+				cartTotalPrice={props.cartTotalPrice}
+				minusProduct={props.minusProduct}
+				plusProduct={props.plusProduct}
+				closeCartFunction={closeCart}
+				cartclick={shopActive}
+				cart={props.cart}
+			/>
 		</>
 	);
 };

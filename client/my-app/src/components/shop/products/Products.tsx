@@ -3,6 +3,7 @@ import { IProduct } from '../../../models/IProduct';
 import { getProducts } from '../../../services/productServices';
 import './Products.scss';
 import { Link, useParams } from 'react-router-dom';
+import Categories from '../categories/Categories';
 
 const Products = () => {
 	const [data, setData] = useState<IProduct[]>([]);
@@ -26,24 +27,29 @@ const Products = () => {
 	if (error) return <div>Error: {error}</div>;
 
 	return (
-		<div className='products'>
-			<ul className='products__list'>
-				{data.map((product: IProduct) => (
-					<Link key={product.id} to={`/product/${product.id}`}>
-						<div className='item-wrapper'>
-							<li key={product.id} className='item-wrapper__item'>
-								<div className='product-img'>
-									<img src={product.url} alt='product-img' />
-								</div>
-								<p>{product.brand_name}</p>
-								<h3>{product.name}</h3>
-								<p>{product.price} kr</p>
-							</li>
-						</div>
-					</Link>
-				))}
-			</ul>
-		</div>
+		<>
+			<div>
+				<Categories />
+			</div>
+			<div className='products'>
+				<ul className='products__list'>
+					{data.map((product: IProduct) => (
+						<Link key={product.id} to={`/product/${product.id}`}>
+							<div className='item-wrapper'>
+								<li key={product.id} className='item-wrapper__item'>
+									<div className='product-img'>
+										<img src={product.url} alt='product-img' />
+									</div>
+									<p>{product.brand_name}</p>
+									<h3>{product.name}</h3>
+									<p>{product.price} kr</p>
+								</li>
+							</div>
+						</Link>
+					))}
+				</ul>
+			</div>
+		</>
 	);
 };
 

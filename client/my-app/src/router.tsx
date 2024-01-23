@@ -6,6 +6,8 @@ import ProductDetails from './components/shop/product/ProductDetails';
 import { About } from './components/home/about/About';
 import { Faq } from './components/home/faq/Faq';
 import { Contact } from './components/home/contact/Contact';
+import Categories from './components/shop/categories/Categories';
+import Subcategories from './components/shop/categories/Subcategories';
 
 export const router = createBrowserRouter([
 	{
@@ -18,6 +20,8 @@ export const router = createBrowserRouter([
 			{ path: '/product/:id', element: <ProductDetails /> },
 			{ path: '/faq', element: <Faq /> },
 			{ path: '/contact', element: <Contact /> },
+			{ path: '/categories', element: <Categories /> },
+			{ path: '/category/:id/subcategories', element: <Subcategories /> },
 		],
 	},
 ]);

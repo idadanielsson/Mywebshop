@@ -1,0 +1,155 @@
+.counter {
+	color: white;
+	position: absolute;
+	background-color: red;
+	border-radius: 50%;
+	top: -10px;
+	right: -10px;
+	font-weight: 800;
+	font-size: 14px;
+	height: 20px;
+	width: 20px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cartsmall {
+	cursor: pointer;
+	position: relative;
+
+	&__icon {
+		font-size: 32px;
+		padding-right: 10px;
+	}
+}
+
+.cartbigwrapper {
+	display: none;
+
+	&__header {
+		font-weight: 700;
+		color: black;
+		font-size: 30px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-right: 10px;
+		padding: 13px;
+	}
+	&__shopcontainer {
+		margin-top: 50px;
+		width: 100%;
+		max-height: 72%;
+		overflow: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		color: black;
+	}
+	&__shopcard {
+		width: 90%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__imgcontainer {
+		width: 50px;
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	&__productnamewrapper {
+		width: 40%;
+	}
+	&__buttons {
+		border-radius: 50%;
+		border: none;
+		background-color: #4a524000;
+		color: #4a5240;
+		padding: 4px 12px;
+		font-size: 30px;
+		font-weight: 900;
+		cursor: pointer;
+	}
+
+	&__checkoutcontainer {
+		display: flex;
+		flex-direction: column;
+		border-top: 1px solid grey;
+		justify-content: end;
+		height: 100px;
+		align-items: center;
+		position: absolute;
+		bottom: 10px;
+		left: 10px;
+		right: 10px;
+	}
+	&__link {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: none;
+	}
+	&__checkoutbutton {
+		border: none;
+		border-radius: 5px;
+		width: 200px;
+		height: 40px;
+		background-color: #302219;
+		color: white;
+		font-size: 16px;
+		font-weight: lighter;
+		cursor: pointer;
+	}
+	&__closebutton {
+		cursor: pointer;
+	}
+	&__totalcontainer {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		color: black;
+		h3 {
+			color: black;
+			font-size: 20px;
+			margin: 10px;
+			margin-right: 0;
+			font-weight: 600;
+		}
+	}
+	&__info {
+		display: flex;
+		justify-content: space-around;
+		padding: 15px;
+		position: relative;
+		height: 25px;
+		&__product {
+			position: absolute;
+			left: 140px;
+		}
+		&__price {
+			right: 210px;
+			position: absolute;
+		}
+		&__amount {
+			position: absolute;
+			right: 85px;
+		}
+	}
+}
+.cartbigwrapperactive {
+	position: absolute;
+	right: 0px;
+	top: 0;
+	height: 100vh;
+	width: 400px;
+	background-color: rgb(240, 235, 230);
+	transform: translateX(0%);
+	transition: transform 0.4s;
+	z-index: 10;
+}

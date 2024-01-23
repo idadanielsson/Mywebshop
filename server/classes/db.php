@@ -56,6 +56,21 @@ class DB {
 
         return $statement->fetch();
     }
+
+    public function getSubCategories() {
+        $query = 'SELECT * FROM subcategories';
+        $statement = $this->pdo->query($query); 
+    
+        return $statement->fetchAll(); 
+    }
+
+    public function getSubCategoryById($subcategoryId) {
+        $query = 'SELECT * FROM subcategories WHERE id = :subcategory_id';
+        $statement = $this->pdo->prepare($query);
+        $statement->execute(['subcategory_id' => $subcategoryId]);
+
+        return $statement->fetch();
+    }
 }
 
 ?>

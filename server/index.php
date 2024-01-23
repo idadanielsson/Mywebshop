@@ -40,6 +40,24 @@ if ($chosenAction == 'categories-id') {
             $categoryApi->outputCategoryById($category);
     }
 }
+
+if (isset($_GET['action'])) {
+    $chosenAction = filter_var($_GET['action'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+    if ($chosenAction == 'subcategories') {
+        $subcategories = $database->getSubCategories(); 
+        $categoryApi->outputSubCategories($subcategories);
+    } 
+}
+
+if ($chosenAction == 'subcategories-id') {
+    if (isset($_GET['id'])) {
+            $subcategoryId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+            $subcategory = $database->getSubCategoryById($subcategoryId);
+            $categoryApi->outputSubCategoryById($subcategory);
+    }
+}
+
 }
 
 ?>

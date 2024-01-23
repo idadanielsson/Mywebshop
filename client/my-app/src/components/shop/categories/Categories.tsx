@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './Categories.scss';
-import { getCategories } from '../../../services/categoryServices';
-import { ICategory } from '../../../models/ICategory';
+import {
+	getCategories,
+	getSubCategories,
+} from '../../../services/categoryServices';
+import { ICategory, ISubcategory } from '../../../models/ICategory';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
-	const [data, setData] = useState<ICategory[]>([]);
+	const [categories, setCategories] = useState<ICategory[]>([]);
+	const [subcategories, setSubcategories] = useState<ISubcategory[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
+	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+		null
+	);
 
 	useEffect(() => {
-		getCategories()
-			.then((result) => {
-				setData(result);
+		Promise.all([getCategories(), getSubCategories()])
+			.then(([categoryData, subcategoryData]) => {
+				setCategories(categoryData);
+				setSubcategories(subcategoryData);
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -20,6 +29,12 @@ const Categories = () => {
 				setLoading(false);
 			});
 	}, []);
+
+	const toggleSubcategories = (categoryId: number) => {
+		setSelectedCategoryId(
+			selectedCategoryId === categoryId ? null : categoryId
+		);
+	};
 
 	if (loading) return <div>Loading data...</div>;
 	if (error) return <div>Error: {error}</div>;
@@ -31,9 +46,20 @@ const Categories = () => {
 			</div>
 			<div className='categories'>
 				<ul className='categories__list'>
-					{data.map((category: ICategory) => (
+					{categories.map((category) => (
 						<li key={category.id} className='categories__item'>
-							<a href='#'>{category.name}</a>
+							<Link to={`/category/${category.id}/subcategories`}>
+								{category.name}
+							</Link>
+							{selectedCategoryId === category.id && (
+								<ul className='subcategories__list'>
+									{subcategories
+										.filter((subcat) => subcat.fk_categoryId === category.id)
+										.map((subcategory) => (
+											<li key={subcategory.id}>{subcategory.name}</li>
+										))}
+								</ul>
+							)}
 						</li>
 					))}
 				</ul>
