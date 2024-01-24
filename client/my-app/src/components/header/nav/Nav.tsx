@@ -35,7 +35,7 @@ export const Nav = (props: INavProps) => {
 						</Link>
 					</li>
 					<li>
-						<Link className='navlinks' to='/products'>
+						<Link className='navlinks' to='/shop'>
 							Shop
 						</Link>
 					</li>

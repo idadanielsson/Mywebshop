@@ -5,36 +5,35 @@ import {
 	getSubCategories,
 } from '../../../services/categoryServices';
 import { ICategory, ISubcategory } from '../../../models/ICategory';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Subcategories from './Subcategories';
 
 const Categories = () => {
 	const [categories, setCategories] = useState<ICategory[]>([]);
-	const [subcategories, setSubcategories] = useState<ISubcategory[]>([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState('');
+	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<string>('');
 	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
 		null
 	);
+	const navigate = useNavigate(); // Använd useNavigate-hooken för att hantera navigering
 
 	useEffect(() => {
-		Promise.all([getCategories(), getSubCategories()])
-			.then(([categoryData, subcategoryData]) => {
-				setCategories(categoryData);
-				setSubcategories(subcategoryData);
+		getCategories()
+			.then((result: ICategory[]) => {
+				setCategories(result);
 				setLoading(false);
 			})
-			.catch((err) => {
+			.catch((err: Error) => {
 				console.error('Error:', err);
 				setError('An error occurred while fetching data');
 				setLoading(false);
 			});
 	}, []);
 
-	const toggleSubcategories = (categoryId: number) => {
-		setSelectedCategoryId(
-			selectedCategoryId === categoryId ? null : categoryId
-		);
-	};
+	function handleCategoryClick(categoryId: number) {
+		setSelectedCategoryId(categoryId);
+		navigate(`/shop/category/${categoryId}`); // Uppdatera URL:en när en kategori väljs
+	}
 
 	if (loading) return <div>Loading data...</div>;
 	if (error) return <div>Error: {error}</div>;
@@ -46,19 +45,13 @@ const Categories = () => {
 			</div>
 			<div className='categories'>
 				<ul className='categories__list'>
-					{categories.map((category) => (
+					{categories.map((category: ICategory) => (
 						<li key={category.id} className='categories__item'>
-							<Link to={`/category/${category.id}/subcategories`}>
+							<button onClick={() => handleCategoryClick(category.id)}>
 								{category.name}
-							</Link>
+							</button>
 							{selectedCategoryId === category.id && (
-								<ul className='subcategories__list'>
-									{subcategories
-										.filter((subcat) => subcat.fk_categoryId === category.id)
-										.map((subcategory) => (
-											<li key={subcategory.id}>{subcategory.name}</li>
-										))}
-								</ul>
+								<Subcategories categoryId={category.id} />
 							)}
 						</li>
 					))}

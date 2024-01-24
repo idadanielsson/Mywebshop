@@ -1,40 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { IProduct } from '../../../models/IProduct';
-import { getProducts } from '../../../services/productServices';
-import './Products.scss';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Categories from '../categories/Categories';
+import { IProduct } from '../../../models/IProduct';
+import {
+	getProducts,
+	getProductsByCategory,
+	getProductsBySubcategory,
+} from '../../../services/productServices';
+import './Products.scss';
 
 const Products = () => {
-	const [data, setData] = useState<IProduct[]>([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState('');
+	const [products, setProducts] = useState<IProduct[]>([]);
+	const { categoryId, subcategoryId } = useParams();
+
+	const category = Number(categoryId);
+	const subcategory = Number(subcategoryId);
 
 	useEffect(() => {
-		getProducts()
-			.then((result) => {
-				setData(result);
-				setLoading(false);
-			})
-			.catch((err) => {
-				console.error('Error:', err);
-				setError('An error occurred while fetching data');
-				setLoading(false);
+		if (subcategoryId) {
+			getProductsBySubcategory(subcategory).then((result) => {
+				setProducts(result);
 			});
-	}, []);
-
-	if (loading) return <div>Loading data...</div>;
-	if (error) return <div>Error: {error}</div>;
+		} else if (categoryId) {
+			getProductsByCategory(category).then((result) => {
+				setProducts(result);
+			});
+		} else {
+			getProducts().then((result) => {
+				setProducts(result);
+			});
+		}
+	}, [categoryId, subcategoryId]);
 
 	return (
 		<>
-			<div>
-				<Categories />
-			</div>
 			<div className='products'>
 				<ul className='products__list'>
-					{data.map((product: IProduct) => (
-						<Link key={product.id} to={`/product/${product.id}`}>
+					{products.map((product: IProduct) => (
+						<Link key={product.id} to={`/shop/product/${product.id}`}>
 							<div className='item-wrapper'>
 								<li key={product.id} className='item-wrapper__item'>
 									<div className='product-img'>

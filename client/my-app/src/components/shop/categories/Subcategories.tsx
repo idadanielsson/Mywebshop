@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getSubCategories } from '../../../services/categoryServices';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ISubcategories, ISubcategory } from '../../../models/ICategory';
 import './Categories.scss';
 
-const Subcategories = () => {
+interface SubcategoriesProps {
+	categoryId: number; // Definiera categoryId som en prop
+}
+
+const Subcategories: React.FC<SubcategoriesProps> = ({ categoryId }) => {
 	const [subcategories, setSubcategories] = useState<ISubcategory[]>([]);
 	const { id } = useParams();
 
@@ -12,19 +16,24 @@ const Subcategories = () => {
 		getSubCategories()
 			.then((allSubcategories) => {
 				const filteredSubcategories = allSubcategories.filter(
-					(subcat) => subcat.fk_categoryId === Number(id)
+					(subcat) => subcat.fk_categoryId === categoryId
 				);
 				setSubcategories(filteredSubcategories);
 			})
 			.catch(console.error);
-	}, [id]);
+	}, [categoryId]);
 
 	return (
 		<div className='categories'>
 			<ul className='categories__list'>
 				{subcategories.map((subcat) => (
 					<li className='categories__item' key={subcat.id}>
-						<a href='#'>{subcat.name}</a>
+						<Link
+							key={subcat.id}
+							to={`/shop/category/${categoryId}/subcategory/${subcat.id}`}
+						>
+							{subcat.name}
+						</Link>
 					</li>
 				))}
 			</ul>
