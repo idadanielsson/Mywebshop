@@ -11,6 +11,7 @@ export interface IProduct {
 	brand_name: string;
 	price: number;
 	img: string;
+	date_created: string;
 }
 
 export interface ApiResponse {

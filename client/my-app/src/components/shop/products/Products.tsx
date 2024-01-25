@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { IProduct } from '../../../models/IProduct';
 import {
+	getProductNews,
 	getProducts,
 	getProductsByCategory,
 	getProductsBySubcategory,
@@ -45,6 +46,10 @@ const Products = () => {
 			});
 		} else if (colorId) {
 			getProductsByColor(color).then((result) => {
+				setProducts(result);
+			});
+		} else if (colorId) {
+			getProductNews().then((result) => {
 				setProducts(result);
 			});
 		} else {

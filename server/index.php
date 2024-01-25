@@ -26,6 +26,11 @@ if (isset($_GET['action'])) {
         }
     }
 
+    if ($chosenAction == 'products-news') {
+        $products = $database->getProductNews(); 
+        $productApi->outputProducts($products);
+    } 
+
     elseif ($chosenAction == 'products-by-category') {
         if (isset($_GET['id'])) { 
             $categoryId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);

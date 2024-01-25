@@ -6,6 +6,7 @@ import { Footer } from '../../Footer';
 import { IProduct } from '../../models/IProduct';
 import { MyContext } from '../../App';
 import { useState } from 'react';
+import { News } from '../shop/news/News';
 
 export const Home = () => {
 	const [products, setProducts] = useState<IProduct[]>([]);
@@ -33,8 +34,9 @@ export const Home = () => {
 						<a href='#'>Upptäck här</a>
 					</div>
 				</section>
-				<div className='category'>
-					<Categories></Categories>
+
+				<div>
+					<News />
 				</div>
 
 				<div>
