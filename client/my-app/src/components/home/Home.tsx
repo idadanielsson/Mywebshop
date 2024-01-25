@@ -9,8 +9,6 @@ import { useState } from 'react';
 import { News } from '../shop/news/News';
 
 export const Home = () => {
-	const [products, setProducts] = useState<IProduct[]>([]);
-
 	return (
 		<>
 			<div className='overlay'>
@@ -31,11 +29,11 @@ export const Home = () => {
 					<div className='sale__img-2'>
 						<h3>Dukning & servering</h3>
 
-						<a href='#'>Upptäck här</a>
+						<Link to={'/shop/category/1'}>Upptäck här</Link>
 					</div>
 				</section>
 
-				<div>
+				<div className='news'>
 					<News />
 				</div>
 

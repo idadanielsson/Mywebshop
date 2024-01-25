@@ -16,8 +16,6 @@ interface ICartBigProps {
 }
 
 export const CartBig = (props: ICartBigProps) => {
-	const [shopActive, setShopActive] = useState(false);
-
 	const add = (c: CartItem) => {
 		props.plusProduct(c);
 	};

@@ -16,7 +16,6 @@ interface INavProps {
 
 export const Nav = (props: INavProps) => {
 	const [shopActive, setShopActive] = useState(false);
-	const [categories, setCategories] = useState([]);
 
 	const toggleCart = () => {
 		setShopActive(!shopActive);

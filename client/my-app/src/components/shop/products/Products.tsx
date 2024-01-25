@@ -9,13 +9,14 @@ import {
 } from '../../../services/productServices';
 import './Products.scss';
 import { LiaShoppingBagSolid } from 'react-icons/lia';
+import { FaHeart, FaRegHeart } from 'react-icons/fa6';
+
 import { MyContext } from '../../../App';
 import { ColorFilter } from '../colorfilter/ColorFilter';
 import { getProductsByColor } from '../../../services/colorServices';
 
 const Products = () => {
 	const [products, setProducts] = useState<IProduct[]>([]);
-	const [selectedColor, setSelectedColor] = useState<number | null>(null);
 
 	const { categoryId, subcategoryId, colorId } = useParams();
 
@@ -31,8 +32,14 @@ const Products = () => {
 		}
 	};
 
-	const handleColorChange = (colorId: number | null) => {
-		setSelectedColor(colorId);
+	const toggleColor = (productId: number) => {
+		setProducts((currentProducts) =>
+			currentProducts.map((product) =>
+				product.id === productId
+					? { ...product, isRed: !product.isRed }
+					: product
+			)
+		);
 	};
 
 	useEffect(() => {
@@ -79,11 +86,16 @@ const Products = () => {
 									<h3>{product.name}</h3>
 									<p>{product.price} kr</p>
 								</div>
-								<div
-									onClick={() => handleAddToCart(product)}
-									className='buy-btn'
-								>
-									<LiaShoppingBagSolid className='buy-btn__icon' />
+								<div className='buy-btn'>
+									<FaHeart
+										className='buy-btn__icon-heart'
+										style={{ color: product.isRed ? 'red' : 'black' }}
+										onClick={() => toggleColor(product.id)}
+									/>
+									<LiaShoppingBagSolid
+										onClick={() => handleAddToCart(product)}
+										className='buy-btn__icon'
+									/>
 								</div>
 							</li>
 						</div>

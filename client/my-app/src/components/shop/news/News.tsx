@@ -5,6 +5,7 @@ import { getProductNews } from '../../../services/productServices';
 import { IProduct } from '../../../models/IProduct';
 import { LiaShoppingBagSolid } from 'react-icons/lia';
 import { MyContext } from '../../../App';
+import { FaHeart } from 'react-icons/fa6';
 
 export const News = () => {
 	const [news, setNews] = useState<IProduct[]>([]);
@@ -16,6 +17,17 @@ export const News = () => {
 			context.addProductToCart(product);
 		}
 	};
+
+	const toggleColor = (productId: number) => {
+		setNews((currentProducts) =>
+			currentProducts.map((product) =>
+				product.id === productId
+					? { ...product, isRed: !product.isRed }
+					: product
+			)
+		);
+	};
+
 	useEffect(() => {
 		getProductNews().then((result: IProduct[]) => {
 			setNews(result);
@@ -43,6 +55,11 @@ export const News = () => {
 									<p>{news.price} kr</p>
 								</div>
 								<div onClick={() => handleAddToCart(news)} className='buy-btn'>
+									<FaHeart
+										className='buy-btn__icon-heart'
+										style={{ color: news.isRed ? 'red' : 'black' }}
+										onClick={() => toggleColor(news.id)}
+									/>
 									<LiaShoppingBagSolid className='buy-btn__icon' />
 								</div>
 							</li>

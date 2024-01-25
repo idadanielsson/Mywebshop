@@ -12,6 +12,7 @@ export interface IProduct {
 	price: number;
 	img: string;
 	date_created: string;
+	isRed: boolean;
 }
 
 export interface ApiResponse {

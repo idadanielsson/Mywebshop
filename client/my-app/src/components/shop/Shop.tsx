@@ -11,10 +11,10 @@ const Shop = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<Categories />
 			<Outlet />
-		</div>
+		</>
 	);
 };
 
