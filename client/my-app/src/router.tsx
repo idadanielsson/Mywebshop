@@ -6,6 +6,8 @@ import { About } from './components/home/about/About';
 import ProductDetails from './components/shop/productdetails/ProductDetails';
 import Shop from './components/shop/Shop';
 import { Checkout } from './components/checkout/Checkout';
+import { Faq } from './components/home/faq/Faq';
+import { Contact } from './components/home/contact/Contact';
 
 export const router = createBrowserRouter([
 	{
@@ -14,6 +16,8 @@ export const router = createBrowserRouter([
 		children: [
 			{ path: '/', element: <Home />, index: true },
 			{ path: '/about', element: <About /> },
+			{ path: '/faq', element: <Faq /> },
+			{ path: '/contact', element: <Contact /> },
 			{ path: '/checkout', element: <Checkout /> },
 			{
 				path: '/shop',

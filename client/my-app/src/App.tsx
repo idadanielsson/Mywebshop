@@ -85,6 +85,9 @@ function App() {
 			<main className='main'>
 				<Outlet />
 			</main>
+			<footer>
+				<Footer />
+			</footer>
 		</MyContext.Provider>
 	);
 }

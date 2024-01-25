@@ -40,7 +40,6 @@ export const Home = () => {
 				<div>
 					<Outlet />
 				</div>
-				<Footer />
 			</div>
 		</>
 	);
