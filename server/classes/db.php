@@ -106,6 +106,18 @@ class DB {
 
         return $statement->fetch();
     }
+
+    public function getProductsByColor($colorId) {
+        $stmt = $this->pdo->prepare('SELECT p.id AS ProductId, p.name AS ProductName 
+        FROM products AS p 
+        INNER JOIN product_colors AS pc ON p.id = pc.fk_productId 
+        INNER JOIN product_sizes_colors AS psc ON p.id = psc.fk_productId 
+        WHERE pc.fk_colorId = ?');
+        
+        $stmt->execute([$colorId]);
+        return $stmt->fetchAll();
+
+    }
 }
 
 ?>

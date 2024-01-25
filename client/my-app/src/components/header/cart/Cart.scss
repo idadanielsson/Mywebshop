@@ -1,10 +1,10 @@
 .counter {
 	color: white;
 	position: absolute;
-	background-color: red;
+	background-color: rgb(119, 216, 161);
 	border-radius: 50%;
-	top: -10px;
-	right: -10px;
+	top: -2px;
+	right: 10px;
 	font-weight: 800;
 	font-size: 14px;
 	height: 20px;
@@ -21,11 +21,12 @@
 
 	&__icon {
 		font-size: 32px;
-		padding-right: 10px;
+		padding-right: 20px;
 	}
 }
 
 .cartbigwrapper {
+	width: 100%;
 	display: none;
 
 	&__header {
@@ -53,6 +54,11 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		padding-bottom: 10px;
+
+		p {
+			font-size: 14px;
+		}
 	}
 	&__imgcontainer {
 		width: 50px;

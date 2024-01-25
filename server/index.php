@@ -66,6 +66,14 @@ if (isset($_GET['action'])) {
         }
     }
 
+    elseif ($chosenAction == 'products-by-color') {
+        if (isset($_GET['id'])) { 
+            $colorId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+            $products = $database->getProductsByColor($colorId);
+            $productApi->outputProducts($products);
+        }
+    }
+
 }
 
 ?>
