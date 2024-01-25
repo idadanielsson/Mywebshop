@@ -6,8 +6,8 @@ import { About } from './components/home/about/About';
 import ProductDetails from './components/shop/productdetails/ProductDetails';
 import Shop from './components/shop/Shop';
 import { Checkout } from './components/checkout/Checkout';
-import { Faq } from './components/home/faq/Faq';
 import { Contact } from './components/home/contact/Contact';
+import Faq from './components/home/faq/Faq';
 
 export const router = createBrowserRouter([
 	{
