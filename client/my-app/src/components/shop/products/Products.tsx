@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { IProduct } from '../../../models/IProduct';
 import {
@@ -7,6 +7,8 @@ import {
 	getProductsBySubcategory,
 } from '../../../services/productServices';
 import './Products.scss';
+import { LiaShoppingBagSolid } from 'react-icons/lia';
+import { MyContext } from '../../../App';
 
 const Products = () => {
 	const [products, setProducts] = useState<IProduct[]>([]);
@@ -14,6 +16,14 @@ const Products = () => {
 
 	const category = Number(categoryId);
 	const subcategory = Number(subcategoryId);
+
+	const context = useContext(MyContext);
+
+	const handleAddToCart = (product: IProduct) => {
+		if (context) {
+			context.addProductToCart(product);
+		}
+	};
 
 	useEffect(() => {
 		if (subcategoryId) {
@@ -36,18 +46,26 @@ const Products = () => {
 			<div className='products'>
 				<ul className='products__list'>
 					{products.map((product: IProduct) => (
-						<Link key={product.id} to={`/shop/product/${product.id}`}>
-							<div className='item-wrapper'>
-								<li key={product.id} className='item-wrapper__item'>
+						<div className='item-wrapper'>
+							<li key={product.id} className='item-wrapper__item'>
+								<Link className='link' to={`/shop/product/${product.id}`}>
 									<div className='product-img'>
 										<img src={product.url} alt='product-img' />
 									</div>
-									<p>{product.brand_name}</p>
+								</Link>
+								<div className='content-wrapper'>
+									<span>{product.brand_name}</span>
 									<h3>{product.name}</h3>
 									<p>{product.price} kr</p>
-								</li>
-							</div>
-						</Link>
+								</div>
+								<div
+									onClick={() => handleAddToCart(product)}
+									className='buy-btn'
+								>
+									<LiaShoppingBagSolid className='buy-btn__icon' />
+								</div>
+							</li>
+						</div>
 					))}
 				</ul>
 			</div>

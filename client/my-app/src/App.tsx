@@ -9,16 +9,19 @@ import { IProduct } from './models/IProduct';
 import { CartItem } from './models/CartItem';
 import { getFromLs, saveToLs } from './services/localStorage';
 
-export type MyContext = {
-	addProductToCart(p: IProduct): void;
+export type MyContextType = {
+	addProductToCart: (p: IProduct) => void;
 	cart: CartItem[];
-	plusProduct(p: CartItem): void;
-	minusProduct(p: CartItem): void;
+	plusProduct: (p: CartItem) => void;
+	minusProduct: (p: CartItem, i: number) => void;
 	cartTotalPrice: number;
 };
 
+export const MyContext = React.createContext<MyContextType | null>(null);
+
 function App() {
 	const [cart, setCart] = useState<CartItem[]>(getFromLs());
+	const [isCartVisible, setIsCartVisible] = useState(false);
 
 	useEffect(() => {
 		saveToLs(cart);
@@ -30,17 +33,16 @@ function App() {
 	);
 
 	const addProductToCart = (product: IProduct) => {
-		let existingItem: CartItem | undefined = cart.find(
-			(cart) => product.id === cart.product.id
-		);
+		let existingItem = cart.find((item) => item.product.id === product.id);
 
 		if (existingItem) {
 			existingItem.amount++;
-			let copy = [...cart];
-			setCart(copy);
+			setCart([...cart]);
 		} else {
 			setCart([...cart, new CartItem(product, 1)]);
 		}
+
+		setIsCartVisible(true);
 	};
 
 	const plusProduct = (product: CartItem) => {
@@ -61,27 +63,29 @@ function App() {
 		}
 	};
 	return (
-		<>
+		<MyContext.Provider
+			value={{
+				addProductToCart,
+				cart,
+				plusProduct,
+				minusProduct,
+				cartTotalPrice,
+			}}
+		>
 			<header>
 				<Nav
-					cartTotalPrice={cartTotalPrice}
 					cart={cart}
+					cartclick={isCartVisible}
+					closeCartFunction={() => setIsCartVisible(false)}
 					plusProduct={plusProduct}
 					minusProduct={minusProduct}
+					cartTotalPrice={cartTotalPrice}
 				/>
 			</header>
 			<main className='main'>
-				<Outlet
-					context={{
-						addProductToCart,
-						cart,
-						plusProduct,
-						minusProduct,
-						cartTotalPrice,
-					}}
-				></Outlet>
+				<Outlet />
 			</main>
-		</>
+		</MyContext.Provider>
 	);
 }
 

@@ -3,12 +3,9 @@ import App from './App';
 import Products from './components/shop/products/Products';
 import { Home } from './components/home/Home';
 import { About } from './components/home/about/About';
-import { Faq } from './components/home/faq/Faq';
-import { Contact } from './components/home/contact/Contact';
-import Categories from './components/shop/categories/Categories';
-import Subcategories from './components/shop/categories/Subcategories';
 import ProductDetails from './components/shop/productdetails/ProductDetails';
 import Shop from './components/shop/Shop';
+import { Checkout } from './components/checkout/Checkout';
 
 export const router = createBrowserRouter([
 	{
@@ -17,6 +14,7 @@ export const router = createBrowserRouter([
 		children: [
 			{ path: '/', element: <Home />, index: true },
 			{ path: '/about', element: <About /> },
+			{ path: '/checkout', element: <Checkout /> },
 			{
 				path: '/shop',
 				element: <Shop />,

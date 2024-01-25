@@ -7,6 +7,8 @@ import { CartBig } from '../cart/CartBig';
 
 interface INavProps {
 	cart: CartItem[];
+	cartclick: boolean;
+	closeCartFunction(): void;
 	plusProduct(p: CartItem): void;
 	minusProduct(p: CartItem, i: number): void;
 	cartTotalPrice: number;
@@ -14,6 +16,7 @@ interface INavProps {
 
 export const Nav = (props: INavProps) => {
 	const [shopActive, setShopActive] = useState(false);
+	const [categories, setCategories] = useState([]);
 
 	const toggleCart = () => {
 		setShopActive(!shopActive);

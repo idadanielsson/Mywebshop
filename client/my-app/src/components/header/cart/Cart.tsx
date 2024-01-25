@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LiaShoppingBagSolid } from 'react-icons/lia';
 import { CartItem } from '../../../models/CartItem';
 import { motion } from 'framer-motion';

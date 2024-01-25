@@ -15,7 +15,7 @@ const Categories = () => {
 	const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
 		null
 	);
-	const navigate = useNavigate(); // Använd useNavigate-hooken för att hantera navigering
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		getCategories()
@@ -40,10 +40,8 @@ const Categories = () => {
 
 	return (
 		<>
-			<div className='category-title'>
-				<h1>Shop by category</h1>
-			</div>
 			<div className='categories'>
+				<h1>Shop by category</h1>
 				<ul className='categories__list'>
 					{categories.map((category: ICategory) => (
 						<li key={category.id} className='categories__item'>

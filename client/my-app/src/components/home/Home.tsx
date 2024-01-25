@@ -10,8 +10,6 @@ import { useState } from 'react';
 export const Home = () => {
 	const [products, setProducts] = useState<IProduct[]>([]);
 
-	const { addProductToCart } = useOutletContext<MyContext>();
-
 	return (
 		<>
 			<div className='overlay'>
@@ -40,7 +38,7 @@ export const Home = () => {
 				</div>
 
 				<div>
-					<Outlet context={{ products, addProductToCart }} />
+					<Outlet />
 				</div>
 				<Footer />
 			</div>

@@ -1,8 +1,9 @@
 import Categories from './categories/Categories';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useOutletContext } from 'react-router-dom';
 
 import Products from './products/Products';
+import { MyContext } from '../../App';
 
 const Shop = () => {
 	return (

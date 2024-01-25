@@ -5,7 +5,7 @@ import { ISubcategories, ISubcategory } from '../../../models/ICategory';
 import './Categories.scss';
 
 interface SubcategoriesProps {
-	categoryId: number; // Definiera categoryId som en prop
+	categoryId: number;
 }
 
 const Subcategories: React.FC<SubcategoriesProps> = ({ categoryId }) => {
@@ -24,10 +24,10 @@ const Subcategories: React.FC<SubcategoriesProps> = ({ categoryId }) => {
 	}, [categoryId]);
 
 	return (
-		<div className='categories'>
-			<ul className='categories__list'>
+		<div className='subcategories'>
+			<ul className='subcategories__list'>
 				{subcategories.map((subcat) => (
-					<li className='categories__item' key={subcat.id}>
+					<li className='subcategories__item' key={subcat.id}>
 						<Link
 							key={subcat.id}
 							to={`/shop/category/${categoryId}/subcategory/${subcat.id}`}
