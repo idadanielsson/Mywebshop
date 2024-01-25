@@ -1,10 +1,12 @@
 <?php
 require_once 'view/product-api.php';
 require_once 'view/category-api.php';
+require_once 'view/color-api.php';
 require_once 'partials/config.php';
 
 $productApi = new ProductApi();
 $categoryApi = new categoryApi();
+$colorApi = new colorApi();
 
 if (isset($_GET['action'])) {
     $chosenAction = filter_var($_GET['action'], FILTER_SANITIZE_SPECIAL_CHARS);
@@ -65,6 +67,20 @@ if (isset($_GET['action'])) {
             $productApi->outputProducts($products);
         }
     }
+
+    elseif ($chosenAction == 'colors') {
+        $colors = $database->getColors(); 
+        $colorApi->outputColors($colors);
+    }
+
+    elseif ($chosenAction == 'colors-id') {
+        if (isset($_GET['id'])) {
+            $colorId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+            $color = $database->getColorById($colorId);
+            $colorApi->outputColorById($color);
+        }
+    }
+
 
     elseif ($chosenAction == 'products-by-color') {
         if (isset($_GET['id'])) { 

@@ -1,15 +1,18 @@
 import Categories from './categories/Categories';
-
-import { Outlet, useOutletContext } from 'react-router-dom';
-
-import Products from './products/Products';
-import { MyContext } from '../../App';
+import { Outlet } from 'react-router-dom';
+import { ColorFilter } from './colorfilter/ColorFilter';
+import { useState } from 'react';
 
 const Shop = () => {
+	const [selectedColor, setSelectedColor] = useState<number | null>(null);
+
+	const handleColorChange = (colorId: number | null) => {
+		setSelectedColor(colorId);
+	};
+
 	return (
 		<div>
 			<Categories />
-
 			<Outlet />
 		</div>
 	);

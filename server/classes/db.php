@@ -107,6 +107,21 @@ class DB {
         return $statement->fetch();
     }
 
+    public function getColors() {
+        $query = 'SELECT * FROM colors';
+        $statement = $this->pdo->query($query); 
+    
+        return $statement->fetchAll(); 
+    }
+
+    public function getColorById($colorId) {
+        $query = 'SELECT * FROM colors WHERE id = :color_id';
+        $statement = $this->pdo->prepare($query);
+        $statement->execute(['color_id' => $colorId]);
+
+        return $statement->fetch();
+    }
+
     public function getProductsByColor($colorId) {
         $stmt = $this->pdo->prepare('SELECT p.id AS ProductId, p.name AS ProductName 
         FROM products AS p 

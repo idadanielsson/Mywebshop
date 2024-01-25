@@ -9,13 +9,18 @@ import {
 import './Products.scss';
 import { LiaShoppingBagSolid } from 'react-icons/lia';
 import { MyContext } from '../../../App';
+import { ColorFilter } from '../colorfilter/ColorFilter';
+import { getProductsByColor } from '../../../services/colorServices';
 
 const Products = () => {
 	const [products, setProducts] = useState<IProduct[]>([]);
-	const { categoryId, subcategoryId } = useParams();
+	const [selectedColor, setSelectedColor] = useState<number | null>(null);
+
+	const { categoryId, subcategoryId, colorId } = useParams();
 
 	const category = Number(categoryId);
 	const subcategory = Number(subcategoryId);
+	const color = Number(colorId);
 
 	const context = useContext(MyContext);
 
@@ -23,6 +28,10 @@ const Products = () => {
 		if (context) {
 			context.addProductToCart(product);
 		}
+	};
+
+	const handleColorChange = (colorId: number | null) => {
+		setSelectedColor(colorId);
 	};
 
 	useEffect(() => {
@@ -34,15 +43,22 @@ const Products = () => {
 			getProductsByCategory(category).then((result) => {
 				setProducts(result);
 			});
+		} else if (colorId) {
+			getProductsByColor(color).then((result) => {
+				setProducts(result);
+			});
 		} else {
 			getProducts().then((result) => {
 				setProducts(result);
 			});
 		}
-	}, [categoryId, subcategoryId]);
+	}, [categoryId, subcategoryId, colorId]);
 
 	return (
 		<>
+			<div>
+				<ColorFilter />
+			</div>
 			<div className='products'>
 				<ul className='products__list'>
 					{products.map((product: IProduct) => (
