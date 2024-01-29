@@ -8,10 +8,7 @@ import {
 	getProductsBySubcategory,
 } from '../../../services/productServices';
 import './Products.scss';
-import { LiaShoppingBagSolid } from 'react-icons/lia';
-import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 
-import { MyContext } from '../../../App';
 import { ColorFilter } from '../colorfilter/ColorFilter';
 import { getProductsByColor } from '../../../services/colorServices';
 
@@ -23,24 +20,6 @@ const Products = () => {
 	const category = Number(categoryId);
 	const subcategory = Number(subcategoryId);
 	const color = Number(colorId);
-
-	const context = useContext(MyContext);
-
-	const handleAddToCart = (product: IProduct) => {
-		if (context) {
-			context.addProductToCart(product);
-		}
-	};
-
-	const toggleColor = (productId: number) => {
-		setProducts((currentProducts) =>
-			currentProducts.map((product) =>
-				product.id === productId
-					? { ...product, isRed: !product.isRed }
-					: product
-			)
-		);
-	};
 
 	useEffect(() => {
 		if (subcategoryId) {
@@ -84,15 +63,7 @@ const Products = () => {
 								<div className='content-wrapper'>
 									<span>{product.brand_name}</span>
 									<h3>{product.name}</h3>
-									<p>{product.price} kr</p>
-								</div>
-								<div className='buy-btn'>
-									<div>
-										<LiaShoppingBagSolid
-											onClick={() => handleAddToCart(product)}
-											className='buy-btn__icon'
-										/>
-									</div>
+									{/* <p>{product.price} kr</p> */}
 								</div>
 							</li>
 						</div>

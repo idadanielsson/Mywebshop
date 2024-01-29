@@ -19,8 +19,12 @@ export const getProductById = async (id: number): Promise<IProduct> => {
 		const response = await axios.get<IProductResponse>(
 			`http://localhost:8888/mywebshop/server/index.php?action=products-id&id=${id}`
 		);
-		console.log('Svar mottaget en produkt:', response.data.product);
-		return response.data.product;
+		console.log('Svar mottaget för en produkt:', response.data.product);
+		return {
+			...response.data.product,
+			sizes: response.data.product.sizes,
+			colors: response.data.product.colors,
+		};
 	} catch (error) {
 		console.error('Ett fel uppstod:', error);
 		throw error;

@@ -18,34 +18,100 @@ class DB {
         FROM products p
         LEFT JOIN brands b ON p.fk_brandId = b.id
         LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
-        GROUP BY p.id, b.name, ps.price 
-        LIMIT 0, 25;');
+        GROUP BY p.id, b.name, ps.price;');
         return $stmt->fetchAll();
     }
 
     public function getProductById($productId) {
-        $stmt = $this->pdo->prepare('SELECT p.*, 
-            b.name as brand_name, 
-            c.Name as color_name, 
-            s.Size as size_name, 
-            ps.price as size_price,
-            img.url as image_url,
-            img.is_primary as is_image_primary
-            FROM products p
-            LEFT JOIN brands b ON p.fk_brandId = b.id
-            LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
-            LEFT JOIN product_colors pc ON p.id = pc.fk_productId
-            LEFT JOIN colors c ON pc.fk_colorId = c.id
-            LEFT JOIN sizes s ON ps.fk_sizeId = s.id
-            LEFT JOIN product_images img ON p.id = img.fk_productId
-            WHERE p.id = :productId');
-    
+        $stmt = $this->pdo->prepare('SELECT 
+        p.*,
+        s.id as size_id, s.size as size_name, 
+        c.id as color_id, c.name as color_name, 
+        psc.price as product_sizes_colors_price,
+        (SELECT pi.url 
+         FROM product_images pi 
+         WHERE pi.fk_productId = p.id AND pi.is_primary = 1
+         LIMIT 1) as image_url 
+        FROM products p
+        LEFT JOIN product_sizes_colors psc ON p.id = psc.fk_productId
+        LEFT JOIN sizes s ON psc.fk_sizeId = s.id
+        LEFT JOIN colors c ON psc.fk_colorId = c.id
+        WHERE p.id = :productId');
         $stmt->execute(['productId' => $productId]);
+        $rows = $stmt->fetchAll();
     
-        $productDetails = $stmt->fetchAll();
+        // Omvandla rader till en strukturerad produkt
+        $product = null;
+        $sizes = [];
+        $colors = [];
+        $images = [];
+        foreach ($rows as $row) {
+            if (!$product) {
+                // Skapa grundläggande produktstruktur
+                $product = [
+                    'id' => $row['id'],
+                    'name' => $row['name'],
+                    'description' => $row['description'],
+                    'short_description' => $row['short_description'],
+                    'fk_categoryId' => $row['fk_categoryId'],
+                    'fk_subcategoryId' => $row['fk_subcategoryId'],
+                    'fk_brandId' => $row['fk_brandId'],
+                    'date_created' => $row['date_created'],
+                    'sizes' => &$sizes,
+                    'colors' => &$colors,
+                    'images' => &$images,
+                ];
+            }
+    
+            // Hantera storlekar och priser
+            $sizeId = $row['size_id']; 
+            if ($sizeId && !isset($sizes[$sizeId])) {
+                $sizes[$sizeId] = [
+                    'id' => $sizeId,
+                    'name' => $row['size_name'],
+                    'prices' => [], // Lista för priser
+                ];
+            }
+    
+    
+            // Lägg till pris för varje unik storlek-färg-kombination
+            if ($sizeId && $row['color_id'] && $row['product_sizes_colors_price'] !== null) {
+                $sizes[$sizeId]['prices'][] = [
+                    'color_id' => $row['color_id'],
+                    'color_name' => $row['color_name'],
+                    'price' => $row['product_sizes_colors_price']
+                ];
+            }
+    
+            // Hantera färger
+            $colorId = $row['color_id'];
+            if ($colorId && !isset($colors[$colorId])) {
+                $colors[$colorId] = [
+                    'id' => $colorId,
+                    'name' => $row['color_name'],
+                    'prices' => [], 
+                ];
+            }
+    
+            // Hantera bilder
+            if ($row['image_url']) {
+                $images[] = [
+                    'url' => $row['image_url'],
+                    'is_primary' => $row['is_image_primary'],
+                ];
+            }
+        }
+    
+        // Omvandla storleks- och färgkartorna till listor
+        $product['sizes'] = array_values($sizes);
+        $product['colors'] = array_values($colors);
+        $product['images'] = array_values($images);
+
         
-        return $productDetails;
+    
+        return $product;
     }
+
     public function getProductImagesById($productId) {
         $stmt = $this->pdo->prepare('SELECT url FROM product_images WHERE fk_productId = :productId');
         $stmt->execute(['productId' => $productId]);
@@ -64,8 +130,7 @@ class DB {
         LEFT JOIN brands b ON p.fk_brandId = b.id
         LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
         WHERE DATEDIFF(CURRENT_DATE, date_created) <= 20
-        GROUP BY p.id, b.name, ps.price
-        LIMIT 0, 25;');
+        GROUP BY p.id, b.name, ps.price;');
         return $stmt->fetchAll();
 
     }

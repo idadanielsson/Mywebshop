@@ -9,10 +9,11 @@ export interface IProduct {
 	url: string;
 	urls: string[];
 	brand_name: string;
-	price: number;
 	img: string;
+	price: number;
 	date_created: string;
-	isRed: boolean;
+	sizes: ISize[];
+	colors: IColor[];
 }
 
 export interface ApiResponse {
@@ -21,4 +22,21 @@ export interface ApiResponse {
 
 export interface IProductResponse {
 	product: IProduct;
+}
+
+export interface IColor {
+	id: number;
+	name: string;
+}
+
+export interface ISize {
+	id: number;
+	name: string;
+	prices: IPrice[];
+}
+
+export interface IPrice {
+	color_id: number;
+	color_name: string;
+	price: number;
 }

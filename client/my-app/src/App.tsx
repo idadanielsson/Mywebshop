@@ -10,7 +10,7 @@ import { CartItem } from './models/CartItem';
 import { getFromLs, saveToLs } from './services/localStorage';
 
 export type MyContextType = {
-	addProductToCart: (p: IProduct) => void;
+	addProductToCart: (item: CartItem) => void;
 	cart: CartItem[];
 	plusProduct: (p: CartItem) => void;
 	minusProduct: (p: CartItem, i: number) => void;
@@ -27,19 +27,33 @@ function App() {
 		saveToLs(cart);
 	}, [cart]);
 
-	const cartTotalPrice = cart.reduce(
-		(price, item) => item.product.price * item.amount + price,
-		0
-	);
+	const cartTotalPrice = cart.reduce((totalPrice, item) => {
+		const selectedSize = item.product.sizes.find(
+			(size) => size.id === item.selectedSize.id
+		);
+		if (selectedSize) {
+			const priceInfo = selectedSize.prices.find(
+				(p) => p.color_id === item.selectedColor.id
+			);
+			if (priceInfo) {
+				return totalPrice + priceInfo.price * item.amount;
+			}
+		}
+		return totalPrice;
+	}, 0);
 
-	const addProductToCart = (product: IProduct) => {
-		let existingItem = cart.find((item) => item.product.id === product.id);
+	const addProductToCart = (newItem: CartItem) => {
+		let existingItem = cart.find(
+			(item) =>
+				item.product.id === newItem.product.id &&
+				item.selectedSize.id === newItem.selectedSize.id &&
+				item.selectedColor.id === newItem.selectedColor.id
+		);
 
 		if (existingItem) {
 			existingItem.amount++;
-			setCart([...cart]);
 		} else {
-			setCart([...cart, new CartItem(product, 1)]);
+			setCart([...cart, newItem]);
 		}
 
 		setIsCartVisible(true);

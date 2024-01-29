@@ -12,21 +12,11 @@ export const News = () => {
 
 	const context = useContext(MyContext);
 
-	const handleAddToCart = (product: IProduct) => {
-		if (context) {
-			context.addProductToCart(product);
-		}
-	};
-
-	const toggleColor = (productId: number) => {
-		setNews((currentProducts) =>
-			currentProducts.map((product) =>
-				product.id === productId
-					? { ...product, isRed: !product.isRed }
-					: product
-			)
-		);
-	};
+	// const handleAddToCart = (product: IProduct) => {
+	// 	if (context) {
+	// 		context.addProductToCart(product);
+	// 	}
+	// };
 
 	useEffect(() => {
 		getProductNews().then((result: IProduct[]) => {
@@ -52,11 +42,11 @@ export const News = () => {
 								<div className='content-wrapper'>
 									<span>{news.brand_name}</span>
 									<h3>{news.name}</h3>
-									<p>{news.price} kr</p>
+									{/* <p>{news.price} kr</p> */}
 								</div>
-								<div onClick={() => handleAddToCart(news)} className='buy-btn'>
+								{/* <div onClick={() => handleAddToCart(news)} className='buy-btn'>
 									<LiaShoppingBagSolid className='buy-btn__icon' />
-								</div>
+								</div> */}
 							</li>
 						</div>
 					))}
