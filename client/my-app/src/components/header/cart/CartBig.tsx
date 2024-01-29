@@ -34,10 +34,11 @@ export const CartBig = (props: ICartBigProps) => {
 				className='cartbigwrapper__shopcard'
 			>
 				<div className='cartbigwrapper__imgcontainer'>
-					<img src={p.product.img} alt={p.product.name} />
+					<img src={p.product.img} alt='' />
 				</div>
 				<p className='cartbigwrapper__productnamewrapper'>{p.product.name}</p>
-				<p>{p.product.price * p.amount}kr</p>
+				<p>{p.price}</p>
+
 				<motion.button
 					whileTap={{ scale: 0.9 }}
 					className='cartbigwrapper__buttons'

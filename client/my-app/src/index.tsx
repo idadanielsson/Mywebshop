@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { router } from './router';
 import { RouterProvider } from 'react-router-dom';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement

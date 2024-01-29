@@ -24,19 +24,20 @@ export interface IProductResponse {
 	product: IProduct;
 }
 
-export interface IColor {
-	id: number;
-	name: string;
-}
-
 export interface ISize {
 	id: number;
 	name: string;
-	prices: IPrice[];
+	colors: IColorWithPrice[];
 }
 
-export interface IPrice {
-	color_id: number;
-	color_name: string;
+export interface IColorWithPrice {
+	id: number;
+	name: string;
 	price: number;
+	images: string[];
+}
+
+export interface IColor {
+	id: number;
+	name: string;
 }

@@ -28,18 +28,7 @@ function App() {
 	}, [cart]);
 
 	const cartTotalPrice = cart.reduce((totalPrice, item) => {
-		const selectedSize = item.product.sizes.find(
-			(size) => size.id === item.selectedSize.id
-		);
-		if (selectedSize) {
-			const priceInfo = selectedSize.prices.find(
-				(p) => p.color_id === item.selectedColor.id
-			);
-			if (priceInfo) {
-				return totalPrice + priceInfo.price * item.amount;
-			}
-		}
-		return totalPrice;
+		return totalPrice + item.selectedColor.price * item.amount;
 	}, 0);
 
 	const addProductToCart = (newItem: CartItem) => {

@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
-import { IColor, IProduct, ISize } from '../../../models/IProduct';
-import { getProductById, getProducts } from '../../../services/productServices';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { IColorWithPrice, IProduct, ISize } from '../../../models/IProduct';
+import { getProductById } from '../../../services/productServices';
+import { useParams } from 'react-router-dom';
 import './ProductDetails.scss';
 import { MyContext } from '../../../App';
 import { CartItem } from '../../../models/CartItem';
+import { Carousel } from 'react-responsive-carousel';
 
 const ProductDetails = () => {
 	const [product, setProduct] = useState<IProduct>();
 	const [selectedSize, setSelectedSize] = useState<ISize>();
-	const [selectedColor, setSelectedColor] = useState<IColor>();
+	const [selectedColor, setSelectedColor] = useState<IColorWithPrice>();
 	const { id } = useParams();
 	const context = useContext(MyContext);
 
@@ -20,39 +21,45 @@ const ProductDetails = () => {
 			setProduct(result);
 
 			if (result) {
-				setSelectedSize(
-					result.sizes.find((s) => s.name === 'One size') || result.sizes[0]
-				);
-				setSelectedColor(result.colors[0]);
+				const initialSize =
+					result.sizes.find((s) => s.name === 'One size') || result.sizes[0];
+				setSelectedSize(initialSize);
+				if (initialSize && initialSize.colors.length > 0) {
+					setSelectedColor(initialSize.colors[0]);
+				}
 			}
 		});
 	}, [newId]);
 
 	const getCurrentPrice = () => {
-		if (selectedSize && selectedColor) {
-			const priceInfo = selectedSize.prices.find(
-				(p) => p.color_id === selectedColor.id
-			);
-			return priceInfo ? priceInfo.price : 'Pris ej tillgängligt';
-		}
-		return 'Välj storlek och färg';
+		return selectedColor ? selectedColor.price : 'Välj storlek och färg';
 	};
+
+	useEffect(() => {
+		console.log('Vald färg:', selectedColor);
+	}, [selectedColor]);
 
 	const handleSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const sizeId = Number(event.target.value);
-		const selectedSize = product?.sizes.find((s) => s.id === sizeId);
-		if (selectedSize) {
-			setSelectedSize(selectedSize);
+		const newSize = product?.sizes.find((s) => s.id === sizeId);
+		if (newSize) {
+			setSelectedSize(newSize);
+			if (newSize.colors && newSize.colors.length > 0) {
+				setSelectedColor(newSize.colors[0]);
+			} else {
+				setSelectedColor(undefined);
+			}
 		}
 	};
 
 	const handleColorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const colorId = Number(event.target.value);
-		const selectedColor = product?.colors.find((c) => c.id === colorId);
-		if (selectedColor) {
-			setSelectedColor(selectedColor);
+		const newColor = selectedSize?.colors.find((c) => c.id === colorId);
+		if (newColor) {
+			setSelectedColor(newColor);
 		}
 	};
+
 	const handleAddToCart = () => {
 		if (product && selectedSize && selectedColor && context) {
 			const newItem = new CartItem(
@@ -69,14 +76,14 @@ const ProductDetails = () => {
 	return (
 		<div className='product-details'>
 			<div className='product-details-wrapper'>
-				<div className='product-details__primaryimg'>
-					<img src={product?.img} alt='' />
-				</div>
 				<div className='product-details__img'>
-					{product?.urls &&
-						product.urls.map((url, index) => (
-							<img key={index} src={url} alt={`Image ${index + 1}`} />
+					<Carousel showThumbs={false} showStatus={false}>
+						{selectedColor?.images.map((url, index) => (
+							<div key={index}>
+								<img src={url} alt={`Bild ${index + 1}`} />
+							</div>
 						))}
+					</Carousel>
 				</div>
 			</div>
 			<div className='product-details-wrapper-2'>
@@ -98,9 +105,9 @@ const ProductDetails = () => {
 				</div>
 
 				<div className='product-details-wrapper-2__color'>
-					{product?.colors && product.colors.length > 0 && (
+					{selectedSize?.colors && selectedSize.colors.length > 0 && (
 						<select onChange={handleColorChange}>
-							{product.colors.map((color) => (
+							{selectedSize.colors.map((color) => (
 								<option key={color.id} value={color.id}>
 									{color.name}
 								</option>
@@ -108,6 +115,7 @@ const ProductDetails = () => {
 						</select>
 					)}
 				</div>
+
 				<span>beräknad leveranstid: 1-3 dagar</span>
 				<div className='product-details-wrapper-2__description'>
 					<p>{product?.short_description}</p>
