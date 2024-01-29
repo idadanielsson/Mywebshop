@@ -11,9 +11,9 @@ export const Checkout = () => {
 	const { cart, minusProduct, plusProduct, cartTotalPrice } = context;
 
 	return (
-		<div>
-			<h2>Kundvagn</h2>
-			<p>Totalt pris: {cartTotalPrice}</p>
+		<div className='checkout'>
+			<h2 className='checkout__title'>Kundvagn</h2>
+			<p className='checkout__price'>Totalt pris: {cartTotalPrice}</p>
 		</div>
 	);
 };

@@ -74,8 +74,8 @@ const Products = () => {
 			<div className='products'>
 				<ul className='products__list'>
 					{products.map((product: IProduct) => (
-						<div className='item-wrapper'>
-							<li key={product.id} className='item-wrapper__item'>
+						<div key={product.id} className='item-wrapper'>
+							<li className='item-wrapper__item'>
 								<Link className='link' to={`/shop/product/${product.id}`}>
 									<div className='product-img'>
 										<img src={product.url} alt='product-img' />
@@ -87,15 +87,12 @@ const Products = () => {
 									<p>{product.price} kr</p>
 								</div>
 								<div className='buy-btn'>
-									<FaHeart
-										className='buy-btn__icon-heart'
-										style={{ color: product.isRed ? 'red' : 'black' }}
-										onClick={() => toggleColor(product.id)}
-									/>
-									<LiaShoppingBagSolid
-										onClick={() => handleAddToCart(product)}
-										className='buy-btn__icon'
-									/>
+									<div>
+										<LiaShoppingBagSolid
+											onClick={() => handleAddToCart(product)}
+											className='buy-btn__icon'
+										/>
+									</div>
 								</div>
 							</li>
 						</div>

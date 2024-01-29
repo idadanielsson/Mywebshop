@@ -26,16 +26,26 @@ class DB {
     public function getProductById($productId) {
         $stmt = $this->pdo->prepare('SELECT p.*, 
             b.name as brand_name, 
-            ps.price
+            c.Name as color_name, 
+            s.Size as size_name, 
+            ps.price as size_price,
+            img.url as image_url,
+            img.is_primary as is_image_primary
             FROM products p
             LEFT JOIN brands b ON p.fk_brandId = b.id
             LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
-            WHERE p.id = :productId
-            GROUP BY p.id, b.name, p.img, p.description, p.short_description, ps.price;');
+            LEFT JOIN product_colors pc ON p.id = pc.fk_productId
+            LEFT JOIN colors c ON pc.fk_colorId = c.id
+            LEFT JOIN sizes s ON ps.fk_sizeId = s.id
+            LEFT JOIN product_images img ON p.id = img.fk_productId
+            WHERE p.id = :productId');
+    
         $stmt->execute(['productId' => $productId]);
-        return $stmt->fetch();
+    
+        $productDetails = $stmt->fetchAll();
+        
+        return $productDetails;
     }
-
     public function getProductImagesById($productId) {
         $stmt = $this->pdo->prepare('SELECT url FROM product_images WHERE fk_productId = :productId');
         $stmt->execute(['productId' => $productId]);

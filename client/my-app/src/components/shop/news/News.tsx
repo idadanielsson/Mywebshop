@@ -55,11 +55,6 @@ export const News = () => {
 									<p>{news.price} kr</p>
 								</div>
 								<div onClick={() => handleAddToCart(news)} className='buy-btn'>
-									<FaHeart
-										className='buy-btn__icon-heart'
-										style={{ color: news.isRed ? 'red' : 'black' }}
-										onClick={() => toggleColor(news.id)}
-									/>
 									<LiaShoppingBagSolid className='buy-btn__icon' />
 								</div>
 							</li>
