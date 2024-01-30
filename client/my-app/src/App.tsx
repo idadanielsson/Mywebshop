@@ -28,7 +28,7 @@ function App() {
 	}, [cart]);
 
 	const cartTotalPrice = cart.reduce((totalPrice, item) => {
-		return totalPrice + item.selectedColor.price * item.amount;
+		return totalPrice + item.price * item.amount;
 	}, 0);
 
 	const addProductToCart = (newItem: CartItem) => {
@@ -55,16 +55,15 @@ function App() {
 	};
 
 	const minusProduct = (product: CartItem, i: number) => {
+		let newCart = [...cart];
 		if (product.amount === 1) {
-			cart.splice(i, 1);
-			let copy = [...cart];
-			setCart(copy);
+			newCart.splice(i, 1);
 		} else {
-			product.amount--;
-			let copy = [...cart];
-			setCart(copy);
+			newCart[i] = { ...newCart[i], amount: newCart[i].amount - 1 };
 		}
+		setCart(newCart);
 	};
+
 	return (
 		<MyContext.Provider
 			value={{

@@ -13,7 +13,6 @@ const ProductDetails = () => {
 	const [selectedColor, setSelectedColor] = useState<IColorWithPrice>();
 	const { id } = useParams();
 	const context = useContext(MyContext);
-	const [openInfo, setOpenInfo] = useState(null);
 
 	let newId = Number(id);
 
@@ -34,6 +33,13 @@ const ProductDetails = () => {
 
 	const getCurrentPrice = () => {
 		return selectedColor ? selectedColor.price : 'Välj storlek och färg';
+	};
+
+	const handleAddToCart = () => {
+		if (product && selectedSize && selectedColor) {
+			const newItem = new CartItem(product, selectedSize, selectedColor, 1);
+			context!.addProductToCart(newItem);
+		}
 	};
 
 	useEffect(() => {
@@ -111,7 +117,7 @@ const ProductDetails = () => {
 
 						<div className='product-details-wrapper-2__description'></div>
 						<div className='product-details-wrapper-2__add'>
-							<button>Lägg i varukorg</button>
+							<button onClick={handleAddToCart}>Lägg i varukorg</button>
 						</div>
 						<section className='product-details-info'>
 							<p>{product?.description}</p>
