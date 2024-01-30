@@ -24,12 +24,12 @@ export const ColorFilter = () => {
 
 	return (
 		<div className='color-filter'>
-			<label className='color-filter__label'>Välj en färg:</label>
 			<select
+				className='color-filter__select'
 				value={selectedColorId || ''}
 				onChange={(e) => handleColorClick(Number(e.target.value))}
 			>
-				<option value=''>Alla färger</option>
+				<option value=''>Filtrera efter färg</option>
 				{colors.map((color) => (
 					<option key={color.id} value={color.id}>
 						{color.name}

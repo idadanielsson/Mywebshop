@@ -51,7 +51,7 @@ const Products = () => {
 			<div>
 				<Categories />
 			</div>
-			<div>
+			<div className='filter'>
 				<ColorFilter />
 			</div>
 			<ProductList products={products} />

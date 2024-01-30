@@ -1,0 +1,14 @@
+.color-filter {
+	display: flex;
+	flex-direction: column;
+	padding: 20px 40px;
+
+	&__label {
+		padding: 5px 0;
+		font-size: 14px;
+	}
+
+	&__select {
+		padding: 5px 20px;
+	}
+}

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Cart } from '../cart/Cart';
 import { CartItem } from '../../../models/CartItem';
 import { CartBig } from '../cart/CartBig';
-import { Search } from '../search/Search';
+import { IoSearchOutline } from 'react-icons/io5';
 
 interface INavProps {
 	cart: CartItem[];
@@ -67,14 +67,16 @@ export const Nav = (props: INavProps) => {
 						</Link>
 					</li>
 				</ul>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} className='search'>
+					<IoSearchOutline className='search__icon' />
+
 					<input
+						className='search__input'
 						type='text'
 						value={searchTerm}
 						onChange={(e) => setSearchTerm(e.target.value)}
-						placeholder='Sök...'
+						placeholder='Sök efter produkter'
 					/>
-					<button type='submit'>Sök</button>
 				</form>
 				<Cart
 					closeCartFunction={closeCart}

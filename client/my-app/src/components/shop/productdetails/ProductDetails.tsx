@@ -13,6 +13,7 @@ const ProductDetails = () => {
 	const [selectedColor, setSelectedColor] = useState<IColorWithPrice>();
 	const { id } = useParams();
 	const context = useContext(MyContext);
+	const [openInfo, setOpenInfo] = useState(null);
 
 	let newId = Number(id);
 
@@ -60,71 +61,62 @@ const ProductDetails = () => {
 		}
 	};
 
-	const handleAddToCart = () => {
-		if (product && selectedSize && selectedColor && context) {
-			const newItem = new CartItem(
-				product,
-				selectedSize,
-				selectedColor,
-
-				1
-			);
-			context.addProductToCart(newItem);
-		}
-	};
-
 	return (
-		<div className='product-details'>
-			<div className='product-details-wrapper'>
-				<div className='product-details__img'>
-					<Carousel showThumbs={false} showStatus={false}>
-						{selectedColor?.images.map((url, index) => (
-							<div key={index}>
-								<img src={url} alt={`Bild ${index + 1}`} />
+		<div>
+			<div className='product-details'>
+				<div className='product-details-wrapper'>
+					<div className='product-details__img'>
+						<Carousel showThumbs={false} showStatus={false}>
+							{selectedColor?.images.map((url, index) => (
+								<div key={index}>
+									<img src={url} alt={`Bild ${index + 1}`} />
+								</div>
+							))}
+						</Carousel>
+					</div>
+				</div>
+				<div className='product-details-wrapper-2'>
+					<div className='product-details-wrapper-2__title'>
+						<h3>{product?.name}</h3>
+						<p>{getCurrentPrice()} kr</p>
+						<p>{product?.price}</p>
+					</div>
+
+					<section className='product-details-variants'>
+						<div>
+							<div className='product-details-variants__size'>
+								{product?.sizes && product.sizes.length > 0 && (
+									<select onChange={handleSizeChange}>
+										{product.sizes.map((size) => (
+											<option key={size.id} value={size.id}>
+												{size.name}
+											</option>
+										))}
+									</select>
+								)}
 							</div>
-						))}
-					</Carousel>
-				</div>
-			</div>
-			<div className='product-details-wrapper-2'>
-				<div className='product-details-wrapper-2__title'>
-					<h3>{product?.name}</h3>
-					<p>{getCurrentPrice()} kr</p>
-					<p>{product?.price}</p>
-				</div>
 
-				<section className='product-details-variants'>
-					<div className='product-details-variants__size'>
-						{product?.sizes && product.sizes.length > 0 && (
-							<select onChange={handleSizeChange}>
-								{product.sizes.map((size) => (
-									<option key={size.id} value={size.id}>
-										{size.name}
-									</option>
-								))}
-							</select>
-						)}
-					</div>
+							<div className='product-details-variants__color'>
+								{selectedSize?.colors && selectedSize.colors.length > 0 && (
+									<select onChange={handleColorChange}>
+										{selectedSize.colors.map((color) => (
+											<option key={color.id} value={color.id}>
+												{color.name}
+											</option>
+										))}
+									</select>
+								)}
+							</div>
+						</div>
 
-					<div className='product-details-variants__color'>
-						{selectedSize?.colors && selectedSize.colors.length > 0 && (
-							<select onChange={handleColorChange}>
-								{selectedSize.colors.map((color) => (
-									<option key={color.id} value={color.id}>
-										{color.name}
-									</option>
-								))}
-							</select>
-						)}
-					</div>
-				</section>
-
-				<span>beräknad leveranstid: 1-3 dagar</span>
-				<div className='product-details-wrapper-2__description'>
-					<p>{product?.short_description}</p>
-				</div>
-				<div className='product-details-wrapper-2__add'>
-					<button onClick={handleAddToCart}>Lägg i varukorg</button>
+						<div className='product-details-wrapper-2__description'></div>
+						<div className='product-details-wrapper-2__add'>
+							<button>Lägg i varukorg</button>
+						</div>
+						<section className='product-details-info'>
+							<p>{product?.description}</p>
+						</section>
+					</section>
 				</div>
 			</div>
 		</div>
