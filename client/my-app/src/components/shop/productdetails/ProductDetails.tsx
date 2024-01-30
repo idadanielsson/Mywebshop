@@ -92,29 +92,32 @@ const ProductDetails = () => {
 					<p>{getCurrentPrice()} kr</p>
 					<p>{product?.price}</p>
 				</div>
-				<div className='product-details-wrapper-2__size'>
-					{product?.sizes && product.sizes.length > 0 && (
-						<select onChange={handleSizeChange}>
-							{product.sizes.map((size) => (
-								<option key={size.id} value={size.id}>
-									{size.name}
-								</option>
-							))}
-						</select>
-					)}
-				</div>
 
-				<div className='product-details-wrapper-2__color'>
-					{selectedSize?.colors && selectedSize.colors.length > 0 && (
-						<select onChange={handleColorChange}>
-							{selectedSize.colors.map((color) => (
-								<option key={color.id} value={color.id}>
-									{color.name}
-								</option>
-							))}
-						</select>
-					)}
-				</div>
+				<section className='product-details-variants'>
+					<div className='product-details-variants__size'>
+						{product?.sizes && product.sizes.length > 0 && (
+							<select onChange={handleSizeChange}>
+								{product.sizes.map((size) => (
+									<option key={size.id} value={size.id}>
+										{size.name}
+									</option>
+								))}
+							</select>
+						)}
+					</div>
+
+					<div className='product-details-variants__color'>
+						{selectedSize?.colors && selectedSize.colors.length > 0 && (
+							<select onChange={handleColorChange}>
+								{selectedSize.colors.map((color) => (
+									<option key={color.id} value={color.id}>
+										{color.name}
+									</option>
+								))}
+							</select>
+						)}
+					</div>
+				</section>
 
 				<span>beräknad leveranstid: 1-3 dagar</span>
 				<div className='product-details-wrapper-2__description'>

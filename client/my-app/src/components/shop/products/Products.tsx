@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { IProduct } from '../../../models/IProduct';
+import { IColorWithPrice, IProduct } from '../../../models/IProduct';
 import {
 	getProductNews,
 	getProducts,
@@ -11,6 +11,8 @@ import './Products.scss';
 
 import { ColorFilter } from '../colorfilter/ColorFilter';
 import { getProductsByColor } from '../../../services/colorServices';
+import Categories from '../categories/Categories';
+import ProductList from '../productlist/ProductList';
 
 const Products = () => {
 	const [products, setProducts] = useState<IProduct[]>([]);
@@ -44,32 +46,15 @@ const Products = () => {
 			});
 		}
 	}, [categoryId, subcategoryId, colorId]);
-
 	return (
 		<>
 			<div>
+				<Categories />
+			</div>
+			<div>
 				<ColorFilter />
 			</div>
-			<div className='products'>
-				<ul className='products__list'>
-					{products.map((product: IProduct) => (
-						<div key={product.id} className='item-wrapper'>
-							<li className='item-wrapper__item'>
-								<Link className='link' to={`/shop/product/${product.id}`}>
-									<div className='product-img'>
-										<img src={product.url} alt='product-img' />
-									</div>
-								</Link>
-								<div className='content-wrapper'>
-									<span>{product.brand_name}</span>
-									<h3>{product.name}</h3>
-									{/* <p>{product.price} kr</p> */}
-								</div>
-							</li>
-						</div>
-					))}
-				</ul>
-			</div>
+			<ProductList products={products} />
 		</>
 	);
 };

@@ -95,6 +95,14 @@ if (isset($_GET['action'])) {
         }
     }
 
+    elseif ($chosenAction == 'search-products') {
+        if (isset($_GET['term'])) {
+            $searchTerm = filter_var($_GET['term'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $products = $database->searchProducts($searchTerm);
+            $productApi->outputProducts($products);
+        }
+    }
+
 }
 
 ?>

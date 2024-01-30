@@ -221,6 +221,25 @@ class DB {
         return $stmt->fetchAll();
 
     }
+
+    public function searchProducts($searchTerm) {
+        $searchTerm = "%$searchTerm%";
+        $stmt = $this->pdo->prepare('SELECT p.*, 
+        b.name as brand_name, 
+        ps.price, 
+        (SELECT pi.url 
+         FROM product_images pi 
+         WHERE pi.fk_productId = p.id AND pi.is_primary = 1
+         LIMIT 1) as url 
+        FROM products p
+        LEFT JOIN brands b ON p.fk_brandId = b.id
+        LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
+        WHERE p.name LIKE ? OR p.description LIKE ?
+        GROUP BY p.id, b.name, ps.price');
+    
+        $stmt->execute([$searchTerm, $searchTerm]);
+        return $stmt->fetchAll();
+    }
     
 }
 

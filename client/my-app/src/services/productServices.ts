@@ -75,3 +75,18 @@ export const getProductsBySubcategory = async (
 		throw error;
 	}
 };
+
+export const searchProducts = async (
+	searchTerm: string
+): Promise<IProduct[]> => {
+	try {
+		const response = await axios.get<ApiResponse>(
+			`http://localhost:8888/mywebshop/server/index.php?action=search-products&term=${searchTerm}`
+		);
+		console.log('Svar mottaget för sökning:', response.data.result);
+		return response.data.result;
+	} catch (error) {
+		console.error('Ett fel uppstod vid sökning:', error);
+		throw error;
+	}
+};

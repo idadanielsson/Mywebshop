@@ -8,6 +8,7 @@ import Shop from './components/shop/Shop';
 import { Checkout } from './components/checkout/Checkout';
 import { Contact } from './components/home/contact/Contact';
 import Faq from './components/home/faq/Faq';
+import { Search } from './components/header/search/Search';
 
 export const router = createBrowserRouter([
 	{
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
 			{ path: '/faq', element: <Faq /> },
 			{ path: '/contact', element: <Contact /> },
 			{ path: '/checkout', element: <Checkout /> },
+			{ path: 'search', element: <Search /> },
 			{
 				path: '/shop',
 				element: <Shop />,
@@ -30,6 +32,7 @@ export const router = createBrowserRouter([
 						path: 'category/:categoryId/subcategory/:subcategoryId',
 						element: <Products />,
 					},
+
 					{
 						path: 'color/:colorId',
 						element: <Products />,
