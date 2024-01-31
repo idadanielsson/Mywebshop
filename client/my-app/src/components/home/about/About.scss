@@ -1,14 +1,21 @@
 .about {
 	width: 100%;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-	padding: 40px 0;
+
 	margin-bottom: 40px;
 }
 
+@media only screen and (min-width: 992px) {
+	.about {
+		flex-direction: row;
+	}
+}
+
 .title {
-	margin: 40px 0;
+	margin-top: 40px;
 
 	h3 {
 		font-size: 24px;
@@ -17,7 +24,7 @@
 }
 
 .content {
-	width: 40%;
+	width: 90%;
 
 	&__text {
 		padding: 20px 0;
@@ -27,7 +34,7 @@
 }
 
 .img-wrapper {
-	width: 40%;
+	width: 90%;
 	height: 400px;
 	background-image: url(../../../assets//about-us.png);
 	background-position: center;
@@ -35,9 +42,17 @@
 }
 
 .img-wrapper-2 {
-	width: 40%;
+	width: 90%;
 	height: 400px;
 	background-image: url(../../../assets//about-us-2.png);
 	background-position: center;
 	background-size: cover;
+}
+
+@media only screen and (min-width: 992px) {
+	.img-wrapper,
+	.img-wrapper-2,
+	.content {
+		width: 40%;
+	}
 }

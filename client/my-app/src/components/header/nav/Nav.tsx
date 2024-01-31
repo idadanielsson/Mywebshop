@@ -5,6 +5,7 @@ import { Cart } from '../cart/Cart';
 import { CartItem } from '../../../models/CartItem';
 import { CartBig } from '../cart/CartBig';
 import { IoSearchOutline } from 'react-icons/io5';
+import { RxHamburgerMenu } from 'react-icons/rx';
 
 interface INavProps {
 	cart: CartItem[];
@@ -18,8 +19,13 @@ interface INavProps {
 export const Nav = (props: INavProps) => {
 	const [shopActive, setShopActive] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const navigate = useNavigate();
+
+	const toggleMenu = () => {
+		setIsMenuOpen(!isMenuOpen);
+	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -39,52 +45,61 @@ export const Nav = (props: INavProps) => {
 				<span>Fri frakt vid köp över 499:-</span>
 			</div>
 			<div className='navcontainer'>
-				<ul className='navlist'>
-					<li>
-						<Link className='navlinks' to='/'>
-							Hem
-						</Link>
-					</li>
-					<li>
-						<Link className='navlinks' to='/shop'>
-							Shop
-						</Link>
-					</li>
+				<div className='list-wrapper'>
+					<button className='hamburger' onClick={toggleMenu}>
+						<RxHamburgerMenu />
+					</button>
+					<ul className={`navlist ${isMenuOpen ? 'active' : ''}`}>
+						<li>
+							<Link className='navlinks' to='/'>
+								Hem
+							</Link>
+						</li>
+						<li>
+							<Link className='navlinks' to='/shop'>
+								Shop
+							</Link>
+						</li>
 
-					<li>
-						<Link className='navlinks' to='/about'>
-							Om oss
-						</Link>
-					</li>
-					<li>
-						<Link className='navlinks' to='/faq'>
-							FAQ
-						</Link>
-					</li>
-					<li className='navlinks'>
-						<Link className='navlinks' to='/contact'>
-							Kontakt
-						</Link>
-					</li>
-				</ul>
-				<form onSubmit={handleSubmit} className='search'>
-					<IoSearchOutline className='search__icon' />
+						<li>
+							<Link className='navlinks' to='/about'>
+								Om oss
+							</Link>
+						</li>
+						<li>
+							<Link className='navlinks' to='/faq'>
+								FAQ
+							</Link>
+						</li>
+						<li className='navlinks'>
+							<Link className='navlinks' to='/contact'>
+								Kontakt
+							</Link>
+						</li>
+					</ul>
+				</div>
 
-					<input
-						className='search__input'
-						type='text'
-						value={searchTerm}
-						onChange={(e) => setSearchTerm(e.target.value)}
-						placeholder='Sök efter produkter'
+				<div className='nav-end'>
+					<form onSubmit={handleSubmit} className='search'>
+						<IoSearchOutline className='search__icon' />
+
+						<input
+							className='search__input'
+							type='text'
+							value={searchTerm}
+							onChange={(e) => setSearchTerm(e.target.value)}
+							placeholder='Sök efter produkter'
+						/>
+					</form>
+					<Cart
+						closeCartFunction={closeCart}
+						openCartFunction={toggleCart}
+						cartclick={shopActive}
+						cart={props.cart}
 					/>
-				</form>
-				<Cart
-					closeCartFunction={closeCart}
-					openCartFunction={toggleCart}
-					cartclick={shopActive}
-					cart={props.cart}
-				/>
+				</div>
 			</div>
+
 			<CartBig
 				cartTotalPrice={props.cartTotalPrice}
 				minusProduct={props.minusProduct}

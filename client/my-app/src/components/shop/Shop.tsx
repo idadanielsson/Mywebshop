@@ -12,7 +12,6 @@ const Shop = () => {
 
 	return (
 		<>
-			{/* <Categories /> */}
 			<Outlet />
 		</>
 	);

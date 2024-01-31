@@ -17,7 +17,7 @@
 	}
 
 	&__form {
-		width: 40%;
+		width: 80%;
 	}
 
 	&__title {
@@ -77,5 +77,11 @@
 		&:hover {
 			background-color: #302219;
 		}
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.contact-form__form {
+		width: 40%;
 	}
 }

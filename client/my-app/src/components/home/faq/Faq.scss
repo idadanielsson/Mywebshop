@@ -5,9 +5,10 @@
 	flex-direction: column;
 	background-color: #f9f9f9;
 	align-items: center;
+
 	&__item {
 		margin-bottom: 10px;
-		width: 40%;
+		width: 90%;
 	}
 
 	&__question {
@@ -30,6 +31,12 @@
 		background-color: white;
 		border: 1px solid #ddd;
 		border-top: none;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.faq__item {
+		width: 40%;
 	}
 }
 
