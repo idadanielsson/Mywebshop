@@ -8,6 +8,45 @@
 	align-items: center;
 	background-color: #f9f9f9;
 
+	&__message {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		&__title {
+			font-size: 24px;
+			text-transform: uppercase;
+			margin-bottom: 40px;
+		}
+
+		&__icon {
+			font-size: 32px;
+			padding-left: 5px;
+			color: rgb(119, 216, 161);
+		}
+
+		h6 {
+			font-size: 20px;
+			margin-bottom: 10px;
+			text-align: center;
+			font-weight: lighter;
+		}
+
+		&__list {
+			list-style-type: none;
+		}
+
+		&__item {
+			padding: 10px 0;
+		}
+
+		p {
+			font-weight: bold;
+			margin-top: 10px;
+		}
+	}
+
 	&__title {
 		margin-bottom: 15px;
 		color: #333;

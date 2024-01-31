@@ -14,7 +14,7 @@ export const Home = () => {
 			<div className='overlay'>
 				<div className='hero'>
 					<h3 className='hero__text'>Hem & inredning</h3>
-					<Link to='/products'>
+					<Link to='/shop'>
 						<button className='hero__button' id='indexbutton'>
 							Köp nu
 						</button>

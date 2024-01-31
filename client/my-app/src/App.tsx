@@ -8,7 +8,6 @@ import './components/home/Home.scss';
 import { IProduct } from './models/IProduct';
 import { CartItem } from './models/CartItem';
 import { getFromLs, saveToLs } from './services/localStorage';
-import { ICategory } from './models/ICategory';
 
 export type MyContextType = {
 	addProductToCart: (item: CartItem) => void;
@@ -16,6 +15,7 @@ export type MyContextType = {
 	plusProduct: (p: CartItem) => void;
 	minusProduct: (p: CartItem, i: number) => void;
 	cartTotalPrice: number;
+	clearCart: () => void;
 };
 
 export const MyContext = React.createContext<MyContextType | null>(null);
@@ -65,6 +65,11 @@ function App() {
 		setCart(newCart);
 	};
 
+	const clearCart = () => {
+		setCart([]);
+		setIsCartVisible(false);
+	};
+
 	return (
 		<MyContext.Provider
 			value={{
@@ -73,6 +78,7 @@ function App() {
 				plusProduct,
 				minusProduct,
 				cartTotalPrice,
+				clearCart,
 			}}
 		>
 			<header>
