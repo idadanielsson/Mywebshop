@@ -12,7 +12,6 @@ export const Checkout = () => {
 
 	const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		// Här hanterar du formulärdata
 	};
 
 	return (
@@ -21,6 +20,9 @@ export const Checkout = () => {
 			<ul className='checkout__list'>
 				{cart.map((item, index) => (
 					<li className='checkout__item' key={index}>
+						<div className='checkout__img'>
+							<img src={item.product.urls[0]} alt='' />
+						</div>
 						<span className='item__name'>{item.product.name}</span>
 						<span className='item__price'>{item.price}:-</span>
 						<div className='item__controls'>
@@ -52,6 +54,20 @@ export const Checkout = () => {
 					placeholder='Adress'
 					required
 				/>
+				<div className='form__city'>
+					<input
+						className='form__input'
+						type='text'
+						placeholder='Postnummer'
+						required
+					/>
+					<input
+						className='form__input'
+						type='text'
+						placeholder='Stad'
+						required
+					/>
+				</div>
 				<select className='form__select' required>
 					<option value=''>Välj fraktmetod</option>
 					<option value='standard'>Standardfrakt</option>

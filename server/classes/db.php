@@ -8,17 +8,27 @@ class DB {
     }
 
     public function getProducts() {
-        $stmt = $this->pdo->query('SELECT p.*, 
-        b.name as brand_name, 
-        ps.price, 
-        (SELECT pi.url 
-         FROM product_images pi 
-         WHERE pi.fk_productId = p.id AND pi.is_primary = 1
-         LIMIT 1) as url 
-        FROM products p
-        LEFT JOIN brands b ON p.fk_brandId = b.id
-        LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
-        GROUP BY p.id, b.name, ps.price;');
+            $stmt = $this->pdo->query('SELECT 
+            p.id,
+            p.name,
+            p.description,
+            b.name as brand_name, 
+            (SELECT MAX(ps.price) 
+                FROM product_sizes ps 
+                WHERE ps.fk_ProductId = p.id) as price,  
+            (SELECT vi.img_url
+                FROM variant_images vi 
+                INNER JOIN product_sizes_colors psc ON vi.fk_product_sizes_colors_id = psc.id
+                WHERE psc.fk_productId = p.id AND vi.is_primary = 1
+                LIMIT 1) as url 
+        FROM 
+            products p
+        LEFT JOIN 
+            brands b ON p.fk_brandId = b.id
+        GROUP BY 
+            p.id
+        ORDER BY 
+            p.id;');
         return $stmt->fetchAll();
     }
 
@@ -106,52 +116,73 @@ class DB {
     }
     
     public function getProductNews() {
-        $stmt = $this->pdo->query('SELECT p.*, 
+        $stmt = $this->pdo->query('SELECT 
+        p.id,
+        p.name,
+        p.description,
         b.name as brand_name, 
-        ps.price, 
-        (SELECT pi.url 
-         FROM product_images pi 
-         WHERE pi.fk_productId = p.id AND pi.is_primary = 1
-         LIMIT 1) as url 
-        FROM products p
-        LEFT JOIN brands b ON p.fk_brandId = b.id
-        LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
-        WHERE DATEDIFF(CURRENT_DATE, date_created) <= 20
-        GROUP BY p.id, b.name, ps.price;');
+        (SELECT MAX(ps.price) 
+            FROM product_sizes ps 
+            WHERE ps.fk_ProductId = p.id) as price,  
+        (SELECT vi.img_url
+            FROM variant_images vi 
+            INNER JOIN product_sizes_colors psc ON vi.fk_product_sizes_colors_id = psc.id
+            WHERE psc.fk_productId = p.id AND vi.is_primary = 1
+            LIMIT 1) as url 
+    FROM 
+        products p
+    LEFT JOIN 
+        brands b ON p.fk_brandId = b.id
+    GROUP BY 
+        p.id
+    ORDER BY 
+        p.id;');
         return $stmt->fetchAll();
 
     }
 
+    
+
     public function getProductsByCategoryId($categoryId) {
-        $stmt = $this->pdo->prepare('SELECT p.*, 
+        $stmt = $this->pdo->prepare('SELECT 
+        p.id,
+        p.name,
+        p.description,
         b.name as brand_name, 
-        ps.price, 
-        (SELECT pi.url 
-         FROM product_images pi 
-         WHERE pi.fk_productId = p.id AND pi.is_primary = 1
-         LIMIT 1) as url 
+        (SELECT MAX(ps.price) 
+            FROM product_sizes ps 
+            WHERE ps.fk_productId = p.id) as price,  
+        (SELECT vi.img_url
+            FROM variant_images vi 
+            INNER JOIN product_sizes_colors psc ON vi.fk_product_sizes_colors_id = psc.id
+            WHERE psc.fk_productId = p.id AND vi.is_primary = 1
+            LIMIT 1) as url 
         FROM products p
         LEFT JOIN brands b ON p.fk_brandId = b.id
-        LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
         WHERE p.fk_categoryId = ?
-        GROUP BY p.id, b.name, ps.price');
+        GROUP BY p.id');
         $stmt->execute([$categoryId]);
         return $stmt->fetchAll();
     }
 
     public function getProductsBySubcategories($subcategoryId) {
-        $stmt = $this->pdo->prepare('SELECT p.*, 
+        $stmt = $this->pdo->prepare('SELECT 
+        p.id,
+        p.name,
+        p.description,
         b.name as brand_name, 
-        ps.price, 
-        (SELECT pi.url 
-         FROM product_images pi 
-         WHERE pi.fk_productId = p.id AND pi.is_primary = 1
-         LIMIT 1) as url 
+        (SELECT MAX(ps.price) 
+            FROM product_sizes ps 
+            WHERE ps.fk_productId = p.id) as price,  
+        (SELECT vi.img_url
+            FROM variant_images vi 
+            INNER JOIN product_sizes_colors psc ON vi.fk_product_sizes_colors_id = psc.id
+            WHERE psc.fk_productId = p.id AND vi.is_primary = 1
+            LIMIT 1) as url 
         FROM products p
         LEFT JOIN brands b ON p.fk_brandId = b.id
-        LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
         WHERE p.fk_subcategoryId = ? 
-        GROUP BY p.id, b.name, ps.price');
+        GROUP BY p.id');
         $stmt->execute([$subcategoryId]);
         return $stmt->fetchAll();
 
@@ -223,23 +254,23 @@ class DB {
     }
 
     public function searchProducts($searchTerm) {
-        $searchTerm = "%$searchTerm%";
-        $stmt = $this->pdo->prepare('SELECT p.*, 
-        b.name as brand_name, 
-        ps.price, 
-        (SELECT pi.url 
-         FROM product_images pi 
-         WHERE pi.fk_productId = p.id AND pi.is_primary = 1
-         LIMIT 1) as url 
-        FROM products p
-        LEFT JOIN brands b ON p.fk_brandId = b.id
-        LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
-        WHERE p.name LIKE ? OR p.description LIKE ?
-        GROUP BY p.id, b.name, ps.price');
-    
-        $stmt->execute([$searchTerm, $searchTerm]);
-        return $stmt->fetchAll();
-    }
+    $searchTerm = "%$searchTerm%";
+    $stmt = $this->pdo->prepare('SELECT p.*, 
+    b.name as brand_name, 
+    ps.price, 
+    (SELECT pi.url 
+     FROM product_images pi 
+     WHERE pi.fk_productId = p.id AND pi.is_primary = 1
+     LIMIT 1) as url 
+    FROM products p
+    LEFT JOIN brands b ON p.fk_brandId = b.id
+    LEFT JOIN product_sizes ps ON p.id = ps.fk_productId
+    WHERE p.name LIKE ? OR p.description LIKE ?
+    GROUP BY p.id, b.name, ps.price');
+
+    $stmt->execute([$searchTerm, $searchTerm]);
+    return $stmt->fetchAll();
+}
     
 }
 

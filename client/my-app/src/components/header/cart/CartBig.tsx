@@ -34,7 +34,7 @@ export const CartBig = (props: ICartBigProps) => {
 				className='cartbigwrapper__shopcard'
 			>
 				<div className='cartbigwrapper__imgcontainer'>
-					<img src={p.product.img} alt='' />
+					<img src={p.product.urls[0]} alt='' />
 				</div>
 				<p className='cartbigwrapper__productnamewrapper'>{p.product.name}</p>
 				<p>{p.price}</p>
@@ -74,7 +74,7 @@ export const CartBig = (props: ICartBigProps) => {
 				/>
 			</div>
 			<div className='cartbigwrapper__info'>
-				<h3>Kassa</h3>
+				<h3>Varukorg</h3>
 			</div>
 			<div className='cartbigwrapper__shopcontainer'>{html}</div>
 			<div className='cartbigwrapper__checkoutcontainer'>
