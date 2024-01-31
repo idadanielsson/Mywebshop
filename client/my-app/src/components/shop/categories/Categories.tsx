@@ -32,7 +32,7 @@ const Categories = () => {
 
 	function handleCategoryClick(categoryId: number) {
 		setSelectedCategoryId(categoryId);
-		navigate(`/shop/category/${categoryId}`); // Uppdatera URL:en när en kategori väljs
+		navigate(`/shop/category/${categoryId}`);
 	}
 
 	if (loading) return <div>Loading data...</div>;

@@ -4,6 +4,9 @@ import { FaFacebookF } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaPinterestSquare } from 'react-icons/fa';
 import { FaTiktok } from 'react-icons/fa';
+import { useContext, useState } from 'react';
+import { ICategories, ICategory } from './models/ICategory';
+import { MyContext } from './App';
 
 export const Footer = () => {
 	return (
@@ -14,25 +17,28 @@ export const Footer = () => {
 				</div>
 				<div className='footer__wrapper'>
 					<div className='footer-wrapper'>
-						<h6 className='footer-wrapper__title'>Kontakt</h6>
+						<h6 className='footer-wrapper__title'>Företagsinformation</h6>
 						<ul className='footer-wrapper__list'>
 							<li className='footer-wrapper__item'>
-								<Link to={''} className='footer-link'>
-									Kundtjänst
+								<Link to={'terms'} className='footer-link'>
+									Villkor
+								</Link>
+							</li>
+
+							<li className='footer-wrapper__item'>
+								<Link to={'faq'} className='footer-link'>
+									FAQ
 								</Link>
 							</li>
 							<li className='footer-wrapper__item'>
-								<Link to={''} className='footer-link'>
-									FAQ
+								<Link to={'contact'} className='footer-link'>
+									Kontaka oss
 								</Link>
 							</li>
 						</ul>
 					</div>
 					<div className='footer-wrapper'>
 						<h6 className='footer-wrapper__title'>Sortiment</h6>
-						<ul className='footer-wrapper__list'>
-							<li className='footer-wrapper__item'></li>
-						</ul>
 					</div>
 					<div className='footer-wrapper'>
 						<h6 className='footer-wrapper__title'>Om Skandinavisk Design</h6>

@@ -8,6 +8,7 @@ import './components/home/Home.scss';
 import { IProduct } from './models/IProduct';
 import { CartItem } from './models/CartItem';
 import { getFromLs, saveToLs } from './services/localStorage';
+import { ICategory } from './models/ICategory';
 
 export type MyContextType = {
 	addProductToCart: (item: CartItem) => void;
