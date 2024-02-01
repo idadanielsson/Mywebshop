@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { CartItem } from '../../../models/CartItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';

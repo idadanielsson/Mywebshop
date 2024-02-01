@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { IColorWithPrice, IProduct } from '../../../models/IProduct';
+import { useParams } from 'react-router-dom';
+import { IProduct } from '../../../models/IProduct';
 import {
 	getProductNews,
 	getProducts,

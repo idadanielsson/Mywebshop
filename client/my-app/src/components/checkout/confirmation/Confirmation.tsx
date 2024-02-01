@@ -1,13 +1,10 @@
 import { GiPartyPopper } from 'react-icons/gi';
 import './Confirmation.scss';
-import { useContext } from 'react';
-import { MyContext } from '../../../App';
 import { getFromLs } from '../../../services/localStorage';
 import { CartItem } from '../../../models/CartItem';
 
 export const Confirmation = () => {
 	const cartFromLocalStorage = getFromLs();
-	const context = useContext(MyContext);
 
 	return (
 		<div className='confirmation'>

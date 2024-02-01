@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { IProduct } from '../../../models/IProduct';
 import './ColorFilter.scss';
 import { IColor } from '../../../models/IColor';
 import { useNavigate } from 'react-router-dom';

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IProduct } from '../../../models/IProduct';
 import { searchProducts } from '../../../services/productServices';
@@ -28,7 +27,6 @@ export const Search = () => {
 				const result = await searchProducts(searchTerm);
 				setProducts(result);
 			} catch (error) {
-				console.error('Ett fel uppstod vid sökning:', error);
 				setError('Ett fel inträffade under sökningen.');
 			}
 

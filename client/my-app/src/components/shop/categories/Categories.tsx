@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Categories.scss';
-import {
-	getCategories,
-	getSubCategories,
-} from '../../../services/categoryServices';
-import { ICategory, ISubcategory } from '../../../models/ICategory';
-import { Link, useNavigate } from 'react-router-dom';
+import { getCategories } from '../../../services/categoryServices';
+import { ICategory } from '../../../models/ICategory';
+import { useNavigate } from 'react-router-dom';
 import Subcategories from './Subcategories';
 
 const Categories = () => {

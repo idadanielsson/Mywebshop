@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Nav } from './components/header/nav/Nav';
 import { Footer } from './Footer';
 import { Outlet } from 'react-router-dom';
 import './components/home/Home.scss';
-import { IProduct } from './models/IProduct';
 import { CartItem } from './models/CartItem';
 import { getFromLs, saveToLs } from './services/localStorage';
 

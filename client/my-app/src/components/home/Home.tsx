@@ -1,11 +1,5 @@
-import { Link, Outlet, useOutletContext } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import './Home.scss';
-import Products from '../shop/products/Products';
-import Categories from '../shop/categories/Categories';
-import { Footer } from '../../Footer';
-import { IProduct } from '../../models/IProduct';
-import { MyContext } from '../../App';
-import { useState } from 'react';
 import { News } from '../shop/news/News';
 
 export const Home = () => {

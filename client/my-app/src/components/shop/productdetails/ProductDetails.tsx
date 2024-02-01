@@ -42,9 +42,7 @@ const ProductDetails = () => {
 		}
 	};
 
-	useEffect(() => {
-		console.log('Vald färg:', selectedColor);
-	}, [selectedColor]);
+	useEffect(() => {}, [selectedColor]);
 
 	const handleSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const sizeId = Number(event.target.value);

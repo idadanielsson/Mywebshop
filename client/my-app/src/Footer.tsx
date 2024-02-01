@@ -4,9 +4,6 @@ import { FaFacebookF } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaPinterestSquare } from 'react-icons/fa';
 import { FaTiktok } from 'react-icons/fa';
-import { useContext, useState } from 'react';
-import { ICategories, ICategory } from './models/ICategory';
-import { MyContext } from './App';
 
 export const Footer = () => {
 	return (

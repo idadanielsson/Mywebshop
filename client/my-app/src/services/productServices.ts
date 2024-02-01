@@ -10,7 +10,6 @@ export const getProducts = async (): Promise<IProduct[]> => {
 		);
 		return response.data.result;
 	} catch (error) {
-		console.error('Ett fel uppstod:', error);
 		throw error;
 	}
 };
@@ -26,7 +25,6 @@ export const getProductById = async (id: number): Promise<IProduct> => {
 			colors: response.data.product.colors,
 		};
 	} catch (error) {
-		console.error('Ett fel uppstod:', error);
 		throw error;
 	}
 };
@@ -38,7 +36,6 @@ export const getProductNews = async (): Promise<IProduct[]> => {
 		);
 		return response.data.result;
 	} catch (error) {
-		console.error('Ett fel uppstod:', error);
 		throw error;
 	}
 };
@@ -50,10 +47,8 @@ export const getProductsByCategory = async (
 		const response = await axios.get<ApiResponse>(
 			`http://localhost:8888/mywebshop/server/index.php?action=products-by-category&id=${id}`
 		);
-		console.log('Svar mottaget id:', response.data.result);
 		return response.data.result;
 	} catch (error) {
-		console.error('Ett fel uppstod:', error);
 		throw error;
 	}
 };
@@ -65,10 +60,8 @@ export const getProductsBySubcategory = async (
 		const response = await axios.get<ApiResponse>(
 			`http://localhost:8888/mywebshop/server/index.php?action=products-by-subcategory&id=${id}`
 		);
-		console.log('Svar mottaget underkategori:', response.data.result);
 		return response.data.result;
 	} catch (error) {
-		console.error('Ett fel uppstod:', error);
 		throw error;
 	}
 };
@@ -82,7 +75,6 @@ export const searchProducts = async (
 		);
 		return response.data.result;
 	} catch (error) {
-		console.error('Ett fel uppstod vid sökning:', error);
 		throw error;
 	}
 };
