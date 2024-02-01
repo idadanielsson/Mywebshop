@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import './Checkout.scss';
 import { MyContext } from '../../App';
-import { GiPartyPopper } from 'react-icons/gi';
 import React from 'react';
+import { Confirmation } from './confirmation/Confirmation';
 
 export const Checkout = () => {
 	const context = useContext(MyContext);
@@ -17,19 +17,14 @@ export const Checkout = () => {
 	const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setPurchaseCompleted(true);
-		clearCart();
+		// clearCart();
 	};
 
 	return (
 		<div className='checkout'>
 			{purchaseCompleted ? (
 				<>
-					<div className='checkout__message'>
-						<h3 className='checkout__message__title'>
-							Tack för ditt köp!{' '}
-							<GiPartyPopper className='checkout__message__icon' />
-						</h3>
-					</div>
+					<Confirmation />
 				</>
 			) : (
 				<>
