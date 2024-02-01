@@ -37,9 +37,7 @@ export const Footer = () => {
 							</li>
 						</ul>
 					</div>
-					<div className='footer-wrapper'>
-						<h6 className='footer-wrapper__title'>Sortiment</h6>
-					</div>
+
 					<div className='footer-wrapper'>
 						<h6 className='footer-wrapper__title'>Om Skandinavisk Design</h6>
 						<ul className='footer-wrapper__list'>

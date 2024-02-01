@@ -17,7 +17,7 @@ export const Checkout = () => {
 	const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setPurchaseCompleted(true);
-		// clearCart();
+		clearCart();
 	};
 
 	return (

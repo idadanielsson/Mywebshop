@@ -260,10 +260,11 @@ class DB {
     $stmt = $this->pdo->prepare('SELECT p.*, 
     b.name as brand_name, 
     ps.price, 
-    (SELECT pi.url 
-     FROM product_images pi 
-     WHERE pi.fk_productId = p.id AND pi.is_primary = 1
-     LIMIT 1) as url 
+    (SELECT vi.img_url
+        FROM variant_images vi 
+        INNER JOIN product_sizes_colors psc ON vi.fk_product_sizes_colors_id = psc.id
+        WHERE psc.fk_productId = p.id AND vi.is_primary = 1
+        LIMIT 1) as url 
     FROM products p
     LEFT JOIN brands b ON p.fk_brandId = b.id
     LEFT JOIN product_sizes ps ON p.id = ps.fk_productId

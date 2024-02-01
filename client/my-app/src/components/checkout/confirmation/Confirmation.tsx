@@ -33,9 +33,6 @@ export const Confirmation = () => {
 					))}
 				</ul>
 			)}
-			<p className='confirmation__total'>
-				Totalsumma: {context?.cartTotalPrice} kr
-			</p>
 		</div>
 	);
 };

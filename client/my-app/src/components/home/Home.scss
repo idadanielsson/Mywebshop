@@ -172,6 +172,12 @@ main {
 	}
 }
 
+@media only screen and (min-width: 992px) {
+	.footer-wrapper__list {
+		align-items: start;
+	}
+}
+
 .footer-social {
 	width: 100%;
 	display: flex;
@@ -182,8 +188,9 @@ main {
 
 	&__list {
 		display: flex;
+
 		list-style-type: none;
-		padding-top: 40px;
+		padding-top: 20px;
 	}
 
 	&__item {
