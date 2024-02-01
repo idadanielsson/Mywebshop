@@ -15,7 +15,8 @@
 	position: relative;
 }
 
-.navlinks {
+.navlinks,
+.navlinks-home {
 	text-decoration: none;
 	padding: 0 20px;
 	font-weight: 600;
@@ -94,6 +95,15 @@
 		display: flex;
 		padding: 0;
 		align-items: center;
+	}
+
+	.navlinks-home {
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: lighter;
+		font-size: 24px;
+		color: black;
+		padding-left: 10px;
 	}
 }
 

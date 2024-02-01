@@ -51,8 +51,8 @@ export const Nav = (props: INavProps) => {
 					</button>
 					<ul className={`navlist ${isMenuOpen ? 'active' : ''}`}>
 						<li>
-							<Link className='navlinks' to='/'>
-								Hem
+							<Link className='navlinks-home' to='/'>
+								Skandinavisk Design
 							</Link>
 						</li>
 						<li>
