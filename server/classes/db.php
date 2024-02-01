@@ -234,23 +234,25 @@ class DB {
     }
 
     public function getProductsByColor($colorId) {
-        $stmt = $this->pdo->prepare('SELECT
-      b.name as brand_name, 
+        $stmt = $this->pdo->prepare('SELECT DISTINCT
+        p.id, 
+        p.name,
+        b.name as brand_name, 
         ps.price,
-        (SELECT pi.url 
-         FROM product_images pi 
-         WHERE pi.fk_productId = p.id AND pi.is_primary = 1
-         LIMIT 1) AS url
-        FROM products AS p
-        INNER JOIN product_colors AS pc ON p.id = pc.fk_productId 
-        INNER JOIN product_sizes_colors AS psc ON p.id = psc.fk_productId 
-        LEFT JOIN brands AS b ON p.fk_brandId = b.id
-        LEFT JOIN product_sizes AS ps ON p.id = ps.fk_productId
-        WHERE pc.fk_colorId = ?');
-        
-        $stmt->execute([$colorId]);
-        return $stmt->fetchAll();
+        vi.img_url as url 
+    FROM products AS p
+    INNER JOIN product_colors AS pc ON p.id = pc.fk_productId 
+    INNER JOIN product_sizes_colors AS psc ON p.id = psc.fk_productId 
+    LEFT JOIN brands AS b ON p.fk_brandId = b.id
+    LEFT JOIN product_sizes AS ps ON p.id = ps.fk_productId
+    LEFT JOIN variant_images AS vi ON vi.fk_product_sizes_colors_id = psc.id
+    WHERE psc.fk_colorId = :colorId AND vi.is_primary = 1');
+    
+    $stmt->execute(['colorId' => $colorId]);
+    $rows = $stmt->fetchAll();
 
+
+    return $rows; 
     }
 
     public function searchProducts($searchTerm) {
