@@ -1,5 +1,7 @@
 <?php
 
+// SQL-queries to communicate with database. 
+
 class DB {
 	private $pdo;
 

@@ -1,4 +1,7 @@
 <?php
+
+// Methods to send JSON data and return product info
+
 class ProductApi {
 
     public function outputProducts($products): void {
