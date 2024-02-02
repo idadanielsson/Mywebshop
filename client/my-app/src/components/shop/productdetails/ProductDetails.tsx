@@ -113,7 +113,6 @@ const ProductDetails = () => {
 							</div>
 						</div>
 
-						<div className='product-details-wrapper-2__description'></div>
 						<div className='product-details-wrapper-2__add'>
 							<button onClick={handleAddToCart}>Lägg i varukorg</button>
 						</div>

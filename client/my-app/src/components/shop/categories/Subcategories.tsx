@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getSubCategories } from '../../../services/categoryServices';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ISubcategory } from '../../../models/ICategory';
 import './Categories.scss';
 
@@ -10,7 +10,6 @@ interface SubcategoriesProps {
 
 const Subcategories: React.FC<SubcategoriesProps> = ({ categoryId }) => {
 	const [subcategories, setSubcategories] = useState<ISubcategory[]>([]);
-	const { id } = useParams();
 
 	useEffect(() => {
 		getSubCategories()

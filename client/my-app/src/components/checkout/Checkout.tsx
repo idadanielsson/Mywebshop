@@ -34,7 +34,7 @@ export const Checkout = () => {
 						{cart.map((item, index) => (
 							<li className='checkout__item' key={index}>
 								<div className='checkout__img'>
-									<img src={item.product.urls[0]} alt='' />
+									<img src={item.selectedColor.images[0]} alt='' />
 								</div>
 								<span className='item__name'>{item.product.name}</span>
 								<span className='item__price'>{item.price}:-</span>

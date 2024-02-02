@@ -28,7 +28,7 @@ main {
 		width: 40%;
 		position: relative;
 		text-align: center;
-		font-size: 42px;
+		font-size: 32px;
 		color: white;
 	}
 
@@ -102,6 +102,10 @@ main {
 @media only screen and (min-width: 992px) {
 	.sale {
 		flex-direction: row;
+	}
+
+	.hero__text {
+		font-size: 42px;
 	}
 }
 

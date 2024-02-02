@@ -30,6 +30,7 @@ export const Nav = (props: INavProps) => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		navigate(`/search?term=${encodeURIComponent(searchTerm)}`);
+		setSearchTerm('');
 	};
 
 	const toggleCart = () => {

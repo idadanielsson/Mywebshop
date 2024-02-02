@@ -6,8 +6,6 @@ import ProductList from '../../shop/productlist/ProductList';
 
 export const Search = () => {
 	const [products, setProducts] = useState<IProduct[]>([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState('');
 	const location = useLocation();
 
 	useEffect(() => {
@@ -20,17 +18,10 @@ export const Search = () => {
 		}
 
 		const fetchProducts = async () => {
-			setIsLoading(true);
-			setError('');
-
 			try {
 				const result = await searchProducts(searchTerm);
 				setProducts(result);
-			} catch (error) {
-				setError('Ett fel inträffade under sökningen.');
-			}
-
-			setIsLoading(false);
+			} catch (error) {}
 		};
 
 		fetchProducts();

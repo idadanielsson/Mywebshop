@@ -49,22 +49,31 @@ export const Footer = () => {
 				<div className='footer-social'>
 					<ul className='footer-social__list'>
 						<li className='footer-social__item'>
-							<a href='' className='footer-social__link'>
+							<a
+								href='https://www.facebook.com'
+								className='footer-social__link'
+							>
 								<FaFacebookF />
 							</a>
 						</li>
 						<li className='footer-social__item'>
-							<a href='' className='footer-social__link'>
+							<a
+								href='https://www.instagram.com/'
+								className='footer-social__link'
+							>
 								<FaInstagram />
 							</a>
 						</li>
 						<li className='footer-social__item'>
-							<a href='' className='footer-social__link'>
+							<a
+								href='https://www.pinterest.com/'
+								className='footer-social__link'
+							>
 								<FaPinterestSquare />
 							</a>
 						</li>
 						<li className='footer-social__item'>
-							<a href='' className='footer-social__link'>
+							<a href='https://www.tiktok.com/' className='footer-social__link'>
 								<FaTiktok />
 							</a>
 						</li>

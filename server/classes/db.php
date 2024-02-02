@@ -9,6 +9,9 @@ class DB {
         $this->pdo = $pdo;
     }
 
+    
+    // Retrieves all products from the database.
+
     public function getProducts() {
             $stmt = $this->pdo->query('SELECT 
             p.id,
@@ -34,6 +37,8 @@ class DB {
         return $stmt->fetchAll();
     }
 
+    // Retrieves a product by its ID.
+
     public function getProductById($productId) {
         $stmt = $this->pdo->prepare('SELECT 
         p.*,
@@ -51,14 +56,13 @@ class DB {
         $stmt->execute(['productId' => $productId]);
         $rows = $stmt->fetchAll();
 
-        // Omvandla rader till en strukturerad produkt
+      
         $product = null;
         $sizes = [];
         $colors = [];
 
         foreach ($rows as $row) {
             if (!$product) {
-                // Skapa grundläggande produktstruktur
                 $product = [
                     'id' => $row['id'],
                     'name' => $row['name'],
@@ -74,7 +78,7 @@ class DB {
                 ];
             }
     
-       // Hantera storlekar och priser
+       // Handle sizes and prizes
        $sizeId = $row['size_id']; 
        if ($sizeId && !isset($sizes[$sizeId])) {
            $sizes[$sizeId] = [
@@ -84,19 +88,19 @@ class DB {
            ];
        }
 
-       // Hantera färger och associera bilder med varje färg
+       // Handle colors and associate images with colors
        $colorId = $row['color_id'];
        if ($colorId) {
            if (!isset($sizes[$sizeId]['colors'][$colorId])) {
                $sizes[$sizeId]['colors'][$colorId] = [
                    'id' => $colorId,
                    'name' => $row['color_name'],
-                   'images' => [], // Array för att hålla bilder för varje färg
-                   'price' => $row['product_sizes_colors_price'], // Pris för denna storlek och färg
+                   'images' => [], 
+                   'price' => $row['product_sizes_colors_price'], 
                ];
            }
 
-           // Lägg till bilderna för den specifika storlek-och-färg-kombinationen
+           // Adding images for specific variants
            if ($row['variant_image_url']) {
                $sizes[$sizeId]['colors'][$colorId]['images'][] = $row['variant_image_url'];
            }
