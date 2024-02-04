@@ -72,7 +72,7 @@ export const Nav = (props: INavProps) => {
 								FAQ
 							</Link>
 						</li>
-						<li className='navlinks'>
+						<li>
 							<Link className='navlinks' to='/contact'>
 								Kontakt
 							</Link>
