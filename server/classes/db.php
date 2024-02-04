@@ -116,7 +116,7 @@ class DB {
 }
 
     public function getProductImagesById($productId) {
-        $stmt = $this->pdo->prepare('SELECT url FROM product_images WHERE fk_productId = :productId');
+        $stmt = $this->pdo->prepare('SELECT img_url FROM variant_images WHERE fk_product_sizes_colors_id = :productId');
         $stmt->execute(['productId' => $productId]);
         return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
     }
